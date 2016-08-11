@@ -2,6 +2,11 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<script type="text/javascript">
+
+	
+
+</script>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/styles.css" />
 </head>
