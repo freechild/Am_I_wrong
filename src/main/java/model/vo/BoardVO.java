@@ -13,6 +13,8 @@ public class BoardVO {
 	private int hit;
 	private Date regdate;
 	private String email;
+	private String savefile;
+	private String origfile;
 	
 	public int getIdx() {
 		return idx;
@@ -75,11 +77,24 @@ public class BoardVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public String getSavefile() {
+		return savefile;
+	}
+	public void setSavefile(String savefile) {
+		this.savefile = savefile;
+	}
+	public String getOrigfile() {
+		return origfile;
+	}
+	public void setOrigfile(String origfile) {
+		this.origfile = origfile;
+	}
+	
 	@Override
 	public String toString() {
 		return "BoardVO [idx=" + idx + ", categoryid=" + categoryid + ", name=" + name + ", pw=" + pw + ", title="
 				+ title + ", content=" + content + ", ip=" + ip + ", hit=" + hit + ", regdate=" + regdate + ", email="
-				+ email + "]";
+				+ email + ", savefile=" + savefile + ", origfile=" + origfile + "]";
 	}
 	
 	

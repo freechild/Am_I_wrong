@@ -32,4 +32,13 @@ public class CategoryService {
 		}
 		return categories;
 	}
+	public CategoryVO getCategories(int categoryid){
+		CategoryVO categories = null;
+		try {
+			categories = categoryDao.selectList(categoryid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return categories;
+	}
 }

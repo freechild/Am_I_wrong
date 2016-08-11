@@ -64,7 +64,7 @@
 				</td>
 				<td>
 					&nbsp;
-					<a href="b_view?idx=${v.idx }&p=${board.currentPage }&s=${board.pageSize }&b=${board.blockSize }&c=${cid}">
+					<a href="b_view?idx=${v.idx }&p=${board.currentPage }&s=${board.pageSize }&b=${board.blockSize }&cid=${cid}">
 					<c:out value="${v.title }"/>
 					</a>
 		
@@ -92,7 +92,7 @@
 				<td align="center" colspan="5" style="border: none;">
 					<!-- 페이지이동 처리 --> <!-- 이전 -->
 			<c:if test="${board.startPage>1 }">
-				[<a href="?p=${board.startPage-1 }&s=${board.pageSize }&b=${board.blockSize}&c=${cid}">이전</a>] 
+				[<a href="?p=${board.startPage-1 }&s=${board.pageSize }&b=${board.blockSize}&cid=${cid}">이전</a>] 
 			</c:if>
 			  <!-- 페이지리스트  -->
 			<c:forEach var="i" begin="${board.startPage }" end="${board.endPage }">
@@ -100,12 +100,12 @@
 					[${i }] 
 				</c:if>
 				<c:if test="${board.currentPage!=i }">
-					[<a href="?p=${i }&s=${board.pageSize }&b=${board.blockSize}&c=${cid}">${i }</a>] 
+					[<a href="?p=${i }&s=${board.pageSize }&b=${board.blockSize}&cid=${cid}">${i }</a>] 
 				</c:if>
 			</c:forEach>
 			 <!-- 다음  -->
 			<c:if test="${board.endPage<board.totalPage }">
-				[<a href="?p=${board.endPage+1 }&s=${board.pageSize }&b=${board.blockSize}&c=${cid}">다음</a>] 
+				[<a href="?p=${board.endPage+1 }&s=${board.pageSize }&b=${board.blockSize}&cid=${cid}">다음</a>] 
 			</c:if>
 		</td>
 	</tr>
@@ -132,9 +132,9 @@
 				<td align="right" colspan="5" style="border: none;"><c:if
 						test="${!empty search }">
 						<input type="button" value="전체보기"
-							onclick="location.href='index.jsp?p=1&s=${board.pageSize }&b=${board.blockSize}&c=${cid}'">
+							onclick="location.href='index.jsp?p=1&s=${board.pageSize }&b=${board.blockSize}&cid=${cid}'">
 					</c:if> <input type="button" value="글쓰기"
-					onclick="location.href='b_write?p=1&s=${p }&b=${b}&c=${c}'">
+					onclick="location.href='b_write?p=1&s=${p }&b=${b}&cid=${cid}'">
 				</td>
 			</tr>
 		</table>

@@ -24,7 +24,7 @@
  		]]>
  	</delete>
  	
- 	<select id="select" parameterType="java.util.HashMap"  resultType="CategoryVO">
+ 	<select id="select" parameterType="int"  resultType="CategoryVO">
  		<![CDATA[
 			select * from category 
  		]]>

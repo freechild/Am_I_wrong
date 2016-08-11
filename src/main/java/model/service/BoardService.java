@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import model.dao.BoardDAO;
 import model.dao.CategoryDAO;
-
+import model.dao.CommentDAO;
 import model.vo.BoardVO;
 import model.vo.PagingList;
 
@@ -18,16 +18,10 @@ public class BoardService {
 	private BoardDAO boardDao;
 	@Autowired
 	private CategoryDAO categoryDao;
+	@Autowired
+	private CommentDAO commentDAO;
 	
 	
-	@Autowired
-	public void setBoardDao(BoardDAO boardDao) {
-		this.boardDao = boardDao;
-	}
-	@Autowired
-	public void setCategoryDao(CategoryDAO categoryDao) {
-		this.categoryDao = categoryDao;
-	}
 
 	
 	// 일반리스트
@@ -75,6 +69,7 @@ public class BoardService {
 			result=1;
 		}		
 		
+		System.out.println("service : "+result);
 		return result;
 	}
 	

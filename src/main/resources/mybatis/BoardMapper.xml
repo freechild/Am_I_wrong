@@ -28,13 +28,13 @@
 	</select>
 	<!-- 넣기 -->
 	<insert id="insert" parameterType="BoardVO">
-		<![CDATA[
+		
 		insert into board
-			(idx,categoryid,name,password,subject,content,ip)
+			(idx,categoryid,name,pw,title,content,ip,savefile,origfile)
 		values
-			(board_idx_seq.nextval,#{categoryid},#{name},#{password},
-			 #{subject},#{content},#{ip})
-		]]>
+			(board_idx_seq.nextval,#{categoryid},#{name},#{pw},
+			 #{title},#{content},#{ip},#{savefile},#{origfile})
+	
 	</insert>
 	<!-- 고치기 -->
 	<update id="update" parameterType="BoardVO">

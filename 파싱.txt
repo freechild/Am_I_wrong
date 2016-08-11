@@ -1,0 +1,22 @@
+﻿메이븐 pom
+
+<dependency>
+	<groupId>org.jsoup</groupId>
+	<artifactId>jsoup</artifactId>
+	<version>1.9.2</version>
+</dependency>
+
+
+Html parsre 파싱하는법
+
+기본구조는 document 로 바꿔서 doc 탐험 구조로 이루어진다.
+
+
+Document doc = Jsoup.connect("파싱원하는 주소").get(); <- 형태로 document 를 만듬
+
+Elements elements = doc.select("#realrank li a");  <- 전체중 원하는곳 파싱 ("css식 동일")
+
+for(Element element : elements){
+				//System.out.println(element);
+				System.out.println(element.text());
+그 안에서 반복문 돌면서 원하는값 뽑음 (list개념)

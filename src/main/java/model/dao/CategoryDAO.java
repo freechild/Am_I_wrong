@@ -21,6 +21,10 @@ public class CategoryDAO {
 	public List<CategoryVO> selectList(){
 		return session.selectList("category.select");
 	}
+	public CategoryVO selectList(int categoryid){
+		int idx =categoryid; 
+		return session.selectOne("category.select",idx);
+	}
 	// 개수구하기
 	public int getCount(){
 		return session.selectOne("category.getCount");

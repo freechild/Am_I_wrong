@@ -4,16 +4,17 @@ import java.util.List;
 
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import model.service.BoardService;
 import model.service.CategoryService;
@@ -21,6 +22,7 @@ import model.service.CommentService;
 import model.service.PagingProcess;
 import model.vo.BoardVO;
 import model.vo.CategoryVO;
+import model.vo.CommentVO;
 import model.vo.PagingList;
 
 
@@ -134,14 +136,29 @@ public class boardController {
 		public String b_view(Model model,@RequestParam("idx") int idx){
 			
 			BoardVO vo = boardService.selectByIdx(idx);
-			
 			model.addAttribute("vo", vo);
+			
+			List<CommentVO> Clist = commentService.selectList(idx);
+			model.addAttribute("clist", Clist);
+			
+			CategoryVO categories =
+					categoryService.getCategories(vo.getCategoryid());
+			
+			System.out.println(categories);
+			
 			
 			return "b_view";
 		}
 	
 		@RequestMapping(value = "b_writeOk")
-		public String b_writeOk(HttpServletResponse response){
+		public String b_writeOk(@ModelAttribute BoardVO vo,HttpServletRequest request){
+			vo.setIp(request.getRemoteAddr());
+			if(vo.getSavefile()==null){
+				vo.setSavefile(" ");
+				vo.setOrigfile(" ");
+			}
+			System.out.println(vo);
+			boardService.insert(vo);
 			
 			return "redirect:/board";
 		}

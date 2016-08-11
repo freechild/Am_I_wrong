@@ -46,7 +46,7 @@
 				<tr>
 					<th align="center">카테고리 선택</th>
 					<td colspan="3" style="border: none;">
-						<select id="${cid }" name="cid">
+						<select id="${cid }" name="categoryid">
 							<c:forEach var="c" items="${categories }">
 								<option value="${c.idx}"
 									${c.idx==cid?" selected='selected' ":"" }>
@@ -88,10 +88,11 @@
 				</tr>
 				<tr>
 
-					<td><input type="submit" value=" 등록하기 "  /> <input
-						type="button" value=" 돌아가기 " onclick="history.back()" />
-						<input type="reset" value=" 다시입력 " 
-						onclick="document.myForm.subject.focus();" /></td>
+					<td>
+						<input type="submit" value=" 등록하기 "  /> 
+						<input type="button" value=" 돌아가기 " onclick="history.back()" />
+						<input type="reset" value=" 다시입력 " onclick="document.myForm.subject.focus();" />
+					</td>
 
 				</tr>
 			</table>
