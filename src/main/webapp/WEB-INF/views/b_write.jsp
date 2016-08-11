@@ -44,10 +44,10 @@
 				<tr>
 					<th align="center">카테고리 선택</th>
 					<td colspan="3" style="border: none;">
-						<select id="categoryid" name="categoryid">
+						<select id="${cid }" name="${cid }">
 							<c:forEach var="c" items="${categories }">
 								<option value="${c.idx}"
-									${c.idx==categories?" selected='selected' ":"" }>
+									${c.idx==cid?" selected='selected' ":"" }>
 									${c.item }
 								</option>
 							</c:forEach>

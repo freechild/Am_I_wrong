@@ -22,7 +22,8 @@
 					<!-- 카테고리와 페이징 정보 -->  
 			<select id="category" onchange="categoryChange(this.value);">
 				<option value="0">전체보기</option>
-				<c:forEach var="c" items="${categoreis }">
+				
+				<c:forEach var="c" items="${categories }">
 					<option value="${c.idx}" ${c.idx==cid?" selected='selected' ":"" }>
 					${c.item }
 					</option>
