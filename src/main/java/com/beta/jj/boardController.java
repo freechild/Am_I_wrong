@@ -56,18 +56,24 @@ public class boardController {
 		public void setCommentService(CommentService commentService) {
 			this.commentService = commentService;
 		}
-
+		
+		int currentPage;
+		//p
+		int pageSize;
+		//s
+		int blockSize;
+		//b
+		int categoryId;
+		//cid
 		@RequestMapping(value = {"board"}, method = RequestMethod.GET)
 		public String board(Model model,HttpServletRequest request) {
 			
-			int currentPage;
-			//p
+			
 			if(request.getParameter("p")==null)
 				currentPage=1;
 			else
 				currentPage = Integer.parseInt( request.getParameter("p"));
-			int pageSize;
-			//s
+			
 			if(request.getParameter("s")==null)
 				pageSize=5;
 			else{
@@ -75,8 +81,7 @@ public class boardController {
 				if (pageSize <= 5)
 					pageSize = 5;
 			}
-			int blockSize;
-			//b
+			
 			if(request.getParameter("b")==null)
 				blockSize=5;
 			else{
@@ -84,8 +89,7 @@ public class boardController {
 				if (blockSize <= 5)
 					blockSize = 5;
 			}
-			int categoryId;
-			//b
+			
 			if(request.getParameter("cid")==null)
 				categoryId=0;
 			else{
@@ -115,7 +119,45 @@ public class boardController {
 	
 		
 		@RequestMapping(value ="b_write")
-		public String b_write(){
+		public String b_write(HttpServletRequest request,Model model){
+			
+			if(request.getParameter("p")==null)
+				currentPage=1;
+			else
+				currentPage = Integer.parseInt( request.getParameter("p"));
+			
+			if(request.getParameter("s")==null)
+				pageSize=5;
+			else{
+				pageSize = Integer.parseInt( request.getParameter("s"));
+				if (pageSize <= 5)
+					pageSize = 5;
+			}
+			
+			if(request.getParameter("b")==null)
+				blockSize=5;
+			else{
+				blockSize = Integer.parseInt( request.getParameter("b"));
+				if (blockSize <= 5)
+					blockSize = 5;
+			}
+			
+			if(request.getParameter("cid")==null)
+				categoryId=0;
+			else{
+				categoryId = Integer.parseInt( request.getParameter("cid"));
+				if (categoryId <= 5 && categoryId > 0)
+					categoryId = 0;
+			}
+			
+			List<CategoryVO>categories =
+					categoryService.getCategories();
+			
+			model.addAttribute("p", currentPage);
+			model.addAttribute("s", pageSize);
+			model.addAttribute("b", blockSize);
+			model.addAttribute("cid", categoryId);
+			model.addAttribute("categories", categories);
 			
 			return "b_write";
 		}

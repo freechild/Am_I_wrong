@@ -1,64 +1,99 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/form/top.jsp"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:include page="index.jsp" />
+<script type="text/javascript">
+	function formCheck(obj){
+		if(!obj.name.value){
+			alert('이름은 반드시 입력해야 합니다.');
+			obj.name.focus();
+			return false;
+		}
+		
+		if(!obj.pw.value){
+			alert('암호는 반드시 입력해야 합니다.');
+			obj.pw.focus();
+			return false;
+		}
+		
+		if(!obj.title.value){
+			alert('제목은 반드시 입력해야 합니다.');
+			obj.title.focus();
+			return false;
+		}
+		
+		if(!obj.content.value){
+			alert('내용은 반드시 입력해야 합니다.');
+			obj.content.focus();
+			return false;
+		}
+		return true;
+	}
+</script>
 
-<div class="pagewidth" align="center">
-	<div class="page-wrap">
-		<div class="content">
-			<form action="board?p=1&s=?&b=?" method="post">
-				<table>
 
-					<tr>
-						<th>제&nbsp;&nbsp;&nbsp;&nbsp;목</th>
-						<td><input type="text" name="subject" size="74"
-							maxlength="100" class="boxTF" /></td>
-					</tr>
-					<tr>
+<article>
+	<div align="center">
+		<form action="board?p=1&s=${p }&b=${b}" onsubmit="return formCheck(this);">
+			<table>
 
-							<th>작성자</th>
-							<td><input type="text" name="name" size="35" maxlength="20"
-								class="boxTF" /></td>
-					</tr>
-					<tr>
-						
-							<th>E-Mail</th>
-							<td><input type="text" name="email" size="35" maxlength="50"
-								class="boxTF" /></td>
-					
-					</tr>
+				<tr>
+					<th>제&nbsp;&nbsp;&nbsp;&nbsp;목</th>
+					<td><input type="text" name="title" size="50" maxlength="100"
+						class="boxTF" /></td>
+				</tr>
+				<tr>
+					<th align="center">카테고리 선택</th>
+					<td colspan="3" style="border: none;">
+						<select id="categoryid" name="categoryid">
+							<c:forEach var="c" items="${categories }">
+								<option value="${c.idx}"
+									${c.idx==categories?" selected='selected' ":"" }>
+									${c.item }
+								</option>
+							</c:forEach>
+						</select>
+					</td>
+				</tr>
+				<tr>
 
-					<tr>
-					
-							<th>내&nbsp;&nbsp;&nbsp;&nbsp;용</th>
-							<td><textarea name="content" cols="63" rows="12"
-									class="boxTA"></textarea></td>
-						
-					</tr>
-					<tr>
-						
-							<th>패스워드</th>
-							<td><input type="password" name="pwd" size="35"
-								maxlength="7" class="boxTF" />&nbsp;(게시물 수정 및 삭제시 필요 !!!)</td>
-					
-					</tr>
-					<tr>
-							<td><input type="file" name="file" class="btn2"/></td>
-					</tr>		
-					<tr>
-					
-							<td><input type="submit" value=" 등록하기 " class="btn2"/>
-							<input type="button" value=" 돌아가기 " class="btn2"
-							onclick="history.back()"/>
-							<input type="reset" value=" 다시입력 " class="btn2"
-								onclick="document.myForm.subject.focus();" /></td>
-					
-					</tr>
-				</table>
-			</form>
-		</div>
+					<th>작성자</th>
+					<td><input type="text" name="name" size="35" maxlength="20"
+						class="boxTF" /></td>
+				</tr>
+				<tr>
+
+					<th>E-Mail</th>
+					<td><input type="text" name="email" size="35" maxlength="50"
+						class="boxTF" /></td>
+
+				</tr>
+
+				<tr>
+
+					<th>내&nbsp;&nbsp;&nbsp;&nbsp;용</th>
+					<td><textarea name="content" cols="63" rows="12" class="boxTA"></textarea></td>
+
+				</tr>
+				<tr>
+
+					<th>패스워드</th>
+					<td><input type="password" name="pw" size="35" maxlength="7"
+						class="boxTF" />&nbsp;(게시물 수정 및 삭제시 필요 !!!)</td>
+
+				</tr>
+				<tr>
+					<td><input type="file" name="file" class="btn2" /></td>
+				</tr>
+				<tr>
+
+					<td><input type="submit" value=" 등록하기 "  /> <input
+						type="button" value=" 돌아가기 " onclick="history.back()" />
+						<input type="reset" value=" 다시입력 " 
+						onclick="document.myForm.subject.focus();" /></td>
+
+				</tr>
+			</table>
+		</form>
 		<div class="clear"></div>
 	</div>
-</div>					
-
-
-<%@ include file="/WEB-INF/views/form/bottom.jsp"%>
+</article>

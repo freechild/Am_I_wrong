@@ -12,7 +12,7 @@
 		<!-- HEADER -->
 		<header class="block">
 		<ul class="header-menu horizontal-list">
-			<li><a class="header-menu-tab" href="#1"><span
+			<li><a class="header-menu-tab" href="main"><span
 					class="icon entypo-cog scnd-font-color"></span>Home</a></li>
 			<li><a class="header-menu-tab" href="board"><span
 					class="icon fontawesome-user scnd-font-color"></span>Board</a></li>
@@ -174,8 +174,7 @@
 		</div>
 		<!-- end main-container -->
 
-		
-		
+			
 		
 </body>
 </html>
