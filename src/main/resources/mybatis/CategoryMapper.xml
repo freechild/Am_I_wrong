@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="category">
+ 	<insert id="insert" parameterType="CategoryVO">
+ 		<![CDATA[
+			insert into category 
+				(idx,item)
+			values
+			 	(category_idx_seq.nextval,#{item })	
+ 		]]>
+ 	</insert>
+ 	
+ 	<update id="update" parameterType="CategoryVO">
+ 		<![CDATA[
+			update category set item=#{item } where idx=#{idx }	
+ 		]]>
+ 	</update>
+ 	
+ 	<delete id="delete" parameterType="int">
+ 		<![CDATA[
+			delete from category where idx=#{idx }	
+ 		]]>
+ 	</delete>
+ 	
+ 	<select id="select" parameterType="java.util.HashMap"  resultType="CategoryVO">
+ 		<![CDATA[
+			select * from category 
+ 		]]>
+	 		<where> 
+	 		 	<if test="idx != null">
+	 				<![CDATA[
+	      			idx=#{idx }
+	 				]]>
+	 			</if> 
+			</where>
+ 	</select>
+ 	<select id="getCount" resultType="int">
+ 		select count(*) from category
+ 	</select>
+ 	
+</mapper>
