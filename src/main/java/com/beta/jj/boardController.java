@@ -1,12 +1,10 @@
 package com.beta.jj;
-
-
-
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,10 +13,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import model.service.BoardService;
 import model.service.CategoryService;
 import model.service.CommentService;
+import model.service.PagingProcess;
 import model.vo.BoardVO;
 import model.vo.CategoryVO;
 import model.vo.PagingList;
@@ -60,12 +60,16 @@ public class boardController {
 			this.commentService = commentService;
 		}
 		
+		@Autowired
+		private PagingProcess pagingProcess; 
 
+		
 	
 		@RequestMapping(value = {"board"}, method = RequestMethod.GET)
 		public String board(Model model,HttpServletRequest request) {
 			
-			HashMap<String, Integer> map =pagingProcess(request);
+			
+			HashMap<String, Integer> map =pagingProcess.pagingProcess(request);
 			
 			
 			int currentPage = map.get("currentPage");
@@ -102,7 +106,7 @@ public class boardController {
 		@RequestMapping(value ="b_write")
 		public String b_write(HttpServletRequest request,Model model){
 			
-			HashMap<String, Integer> map =pagingProcess(request);
+			HashMap<String, Integer> map =pagingProcess.pagingProcess(request);
 			
 			
 			int currentPage = map.get("currentPage");
@@ -136,52 +140,12 @@ public class boardController {
 			return "b_view";
 		}
 	
-		
-		public HashMap<String, Integer> pagingProcess(HttpServletRequest request){
+		@RequestMapping(value = "b_writeOk")
+		public String b_writeOk(HttpServletResponse response){
 			
-			int currentPage;
-			//p
-			int pageSize;
-			//s
-			int blockSize;
-			//b
-			int categoryId;
-			
-			if(request.getParameter("p")==null)
-				currentPage=1;
-			else
-				currentPage = Integer.parseInt( request.getParameter("p"));
-			
-			if(request.getParameter("s")==null)
-				pageSize=5;
-			else{
-				pageSize = Integer.parseInt( request.getParameter("s"));
-				if (pageSize <= 5)
-					pageSize = 5;
-			}
-			
-			if(request.getParameter("b")==null)
-				blockSize=5;
-			else{
-				blockSize = Integer.parseInt( request.getParameter("b"));
-				if (blockSize <= 5)
-					blockSize = 5;
-			}
-			
-			if(request.getParameter("cid")==null)
-				categoryId=0;
-			else{
-				categoryId = Integer.parseInt( request.getParameter("cid"));
-				if (categoryId <= 5 && categoryId > 0)
-					categoryId = 0;
-			}
-			
-			HashMap<String, Integer> map =  new  HashMap<String, Integer>();
-			map.put("currentPage", currentPage);
-			map.put("pageSize", pageSize);
-			map.put("blockSize", blockSize);
-			map.put("categoryId", categoryId);
-		
-			return map;
+			return "redirect:/board";
 		}
+		
+		
+		
 }

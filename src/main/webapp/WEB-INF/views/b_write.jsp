@@ -33,7 +33,9 @@
 
 <article>
 	<div align="center">
-		<form action="board?p=1&s=${p }&b=${b}" onsubmit="return formCheck(this);">
+		<form action="b_writeOk?p=1&s=${p }&b=${b}" onsubmit="return formCheck(this);">
+		<input type="hidden" value="${p }" name="s">
+		<input type="hidden" value="${b }" name="b">
 			<table>
 
 				<tr>
@@ -44,7 +46,7 @@
 				<tr>
 					<th align="center">카테고리 선택</th>
 					<td colspan="3" style="border: none;">
-						<select id="${cid }" name="${cid }">
+						<select id="${cid }" name="cid">
 							<c:forEach var="c" items="${categories }">
 								<option value="${c.idx}"
 									${c.idx==cid?" selected='selected' ":"" }>

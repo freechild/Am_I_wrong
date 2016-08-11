@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <jsp:include page="index.jsp" />
 
+
 <article class="pagewidth" >
 	<div align="center">
 		<table class="board"  border="1" style="border:none;" >
@@ -140,3 +141,6 @@
 					
 	</div>
 </article>		
+
+
+
