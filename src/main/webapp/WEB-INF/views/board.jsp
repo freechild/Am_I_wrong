@@ -63,12 +63,13 @@
 				</td>
 				<td>
 					&nbsp;
-					<a href="view.jsp?idx=${v.idx }&p=${board.currentPage }&s=${board.pageSize }&b=${board.blockSize }&c=${cid}">
+					<a href="b_view?idx=${v.idx }&p=${board.currentPage }&s=${board.pageSize }&b=${board.blockSize }&c=${cid}">
 					<c:out value="${v.title }"/>
 					</a>
 		
 
-			<!-- 여기 추가!!! 댓글의 개수를 출력한다. -->
+			<!-- 댓글의 개수를 출력한다. -->
+			
 					<c:if test="${countList[s.index]>0 }">
 						- (${countList[s.index] })
 					</c:if>

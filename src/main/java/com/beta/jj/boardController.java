@@ -2,7 +2,9 @@ package com.beta.jj;
 
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import model.service.BoardService;
 import model.service.CategoryService;
@@ -57,47 +60,26 @@ public class boardController {
 			this.commentService = commentService;
 		}
 		
-		int currentPage;
-		//p
-		int pageSize;
-		//s
-		int blockSize;
-		//b
-		int categoryId;
-		//cid
+
+	
 		@RequestMapping(value = {"board"}, method = RequestMethod.GET)
 		public String board(Model model,HttpServletRequest request) {
 			
+			HashMap<String, Integer> map =pagingProcess(request);
 			
-			if(request.getParameter("p")==null)
-				currentPage=1;
-			else
-				currentPage = Integer.parseInt( request.getParameter("p"));
 			
-			if(request.getParameter("s")==null)
-				pageSize=5;
-			else{
-				pageSize = Integer.parseInt( request.getParameter("s"));
-				if (pageSize <= 5)
-					pageSize = 5;
-			}
+			int currentPage = map.get("currentPage");
+			//p
+			int pageSize = map.get("pageSize");
+			//s
+			int blockSize = map.get("blockSize");
+			//b
+			int categoryId = map.get("categoryId");
+			//cid
 			
-			if(request.getParameter("b")==null)
-				blockSize=5;
-			else{
-				blockSize = Integer.parseInt( request.getParameter("b"));
-				if (blockSize <= 5)
-					blockSize = 5;
-			}
-			
-			if(request.getParameter("cid")==null)
-				categoryId=0;
-			else{
-				categoryId = Integer.parseInt( request.getParameter("cid"));
-				if (categoryId <= 5 && categoryId > 0)
-					categoryId = 0;
-			}
 			String search = request.getParameter("search");
+			if(search!=null)
+				model.addAttribute("search", search);
 			
 			model.addAttribute("p", currentPage);
 			model.addAttribute("s", pageSize);
@@ -108,8 +90,7 @@ public class boardController {
 			boardService.selectList(currentPage, pageSize, blockSize, categoryId);
 			List<CategoryVO>categories =
 			categoryService.getCategories();
-			if(search!=null)
-				model.addAttribute("search", search);
+			
 			
 			model.addAttribute("board", board);
 			model.addAttribute("categories", categories);
@@ -121,6 +102,51 @@ public class boardController {
 		@RequestMapping(value ="b_write")
 		public String b_write(HttpServletRequest request,Model model){
 			
+			HashMap<String, Integer> map =pagingProcess(request);
+			
+			
+			int currentPage = map.get("currentPage");
+			//p
+			int pageSize = map.get("pageSize");
+			//s
+			int blockSize = map.get("blockSize");
+			//b
+			int categoryId = map.get("categoryId");
+			//cid
+			model.addAttribute("p", currentPage);
+			model.addAttribute("s", pageSize);
+			model.addAttribute("b", blockSize);
+			model.addAttribute("cid", categoryId);
+			
+			List<CategoryVO>categories =
+					categoryService.getCategories();
+			
+			model.addAttribute("categories", categories);
+			
+			return "b_write";
+		}
+	
+		@RequestMapping(value = "b_view")
+		public String b_view(Model model,@RequestParam("idx") int idx){
+			
+			BoardVO vo = boardService.selectByIdx(idx);
+			
+			model.addAttribute("vo", vo);
+			
+			return "b_view";
+		}
+	
+		
+		public HashMap<String, Integer> pagingProcess(HttpServletRequest request){
+			
+			int currentPage;
+			//p
+			int pageSize;
+			//s
+			int blockSize;
+			//b
+			int categoryId;
+			
 			if(request.getParameter("p")==null)
 				currentPage=1;
 			else
@@ -150,17 +176,12 @@ public class boardController {
 					categoryId = 0;
 			}
 			
-			List<CategoryVO>categories =
-					categoryService.getCategories();
-			
-			model.addAttribute("p", currentPage);
-			model.addAttribute("s", pageSize);
-			model.addAttribute("b", blockSize);
-			model.addAttribute("cid", categoryId);
-			model.addAttribute("categories", categories);
-			
-			return "b_write";
+			HashMap<String, Integer> map =  new  HashMap<String, Integer>();
+			map.put("currentPage", currentPage);
+			map.put("pageSize", pageSize);
+			map.put("blockSize", blockSize);
+			map.put("categoryId", categoryId);
+		
+			return map;
 		}
-	
-	
 }
