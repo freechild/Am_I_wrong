@@ -99,7 +99,7 @@ h1, h2, p, a, span{
 .input-container {
 	position: relative;
 }
-	/*로그인 부분  */
+	/*濡쒓렇�씤 遺�遺�  */
 	#login{
 		width: 260px;
 		height: 50px;
@@ -237,7 +237,7 @@ h1, h2, p, a, span{
 
 /** MAIN CONTAINER **/
 .main-container {
-	/**전체 크기 **/
+	/**�쟾泥� �겕湲� **/
 	font-family: 'Ubuntu', sans-serif;
 	width: 1100px;
 	height: 1725px;
@@ -289,7 +289,7 @@ h1, h2, p, a, span{
 						transform: rotate(360deg);
 
 					}
-		/**상위 로그인부분**/			
+		/**�긽�쐞 濡쒓렇�씤遺�遺�**/			
 		.profile-menu {
 			float: right;
 			height: 80px;
@@ -312,7 +312,7 @@ h1, h2, p, a, span{
 				display: inline-block;
 				vertical-align: middle;				
 			}
-	/** CONTAINERS  왼쪽 전체**/
+	/** CONTAINERS  �쇊履� �쟾泥�**/
 	
 	.container {
 		float: left;
@@ -532,6 +532,4 @@ article{
 #board tr td {
 	border-bottom:1px solid #dddddd;
 }
-
-
 

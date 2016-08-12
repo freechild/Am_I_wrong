@@ -35,7 +35,7 @@ public class boardController {
 		private BoardService boardService;
 		@Autowired
 		private CategoryService categoryService;
-		@Autowired
+		@Autowired	
 		private CommentService commentService;
 		
 		public BoardService getBoardService() {
@@ -141,12 +141,6 @@ public class boardController {
 			List<CommentVO> Clist = commentService.selectList(idx);
 			model.addAttribute("clist", Clist);
 			
-			CategoryVO categories =
-					categoryService.getCategories(vo.getCategoryid());
-			
-			System.out.println(categories);
-			
-			
 			return "b_view";
 		}
 	
@@ -163,6 +157,18 @@ public class boardController {
 			return "redirect:/board";
 		}
 		
+	
+		@RequestMapping(value = "b_modify")
+		public String b_modify(Model model,@RequestParam("idx") int idx){
+			
+			BoardVO vo = boardService.selectByIdx(idx);
+			model.addAttribute("vo", vo);
+			
+			List<CommentVO> Clist = commentService.selectList(idx);
+			model.addAttribute("clist", Clist);
+			
+			return "b_write";
+		}
 		
 		
 }

@@ -22,7 +22,7 @@ public class CategoryDAO {
 		return session.selectList("category.select");
 	}
 	public CategoryVO selectList(int categoryid){
-		int idx =categoryid; 
+		int idx = categoryid; 
 		return session.selectOne("category.select",idx);
 	}
 	// 개수구하기

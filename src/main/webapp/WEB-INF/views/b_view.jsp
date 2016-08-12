@@ -3,9 +3,90 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html >
+
+
+
 <jsp:include page="index.jsp" />
 
 <article>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
+<script type="text/javascript">
+	/*레이어 밖 누르면 감추기*/
+	$(document).ready(function(){
+		$(document).mousedown(function(e){
+		$('._popup').each(function(){
+		        if( $(this).css('display') == 'block' )
+		        {
+		            var l_position = $(this).offset();
+		            l_position.right = parseInt(l_position.left) + ($(this).width());
+		            l_position.bottom = parseInt(l_position.top) + parseInt($(this).height());
+	
+	
+		            if( ( l_position.left <= e.pageX && e.pageX <= l_position.right )
+		                && ( l_position.top <= e.pageY && e.pageY <= l_position.bottom ) )
+		            {
+		                //alert( 'popup in click' );
+		            }
+		            else
+		            {
+		                //alert( 'popup out click' );
+		                $(this).hide("fast");
+		            }
+		        }
+		        
+		    });
+		}); 
+	})
+
+
+/* 레이어 보이기*/
+	function show_popup()
+	{
+	    $('._popup').show("fast");
+	    $("._popup").html("비밀번호 입력 & enter<br>");
+	    $("._popup").append("<input type='text' size='6' id='test' onkeypress='checkPW(event)' />");
+	}
+
+	function checkPW(event){
+	    var keyCode = event.keyCode ? event.keyCode : event.which;
+	    
+	    // keyCode가 0이면 which 리턴
+	    
+	    // 혹은
+	    keyCode = event.keyCode || which;
+	 
+	    //console.log(keyCode);
+	    if(keyCode==13){
+	    	var pw = $("#test ").val(); 
+			//alert(pw);	    	    	
+	    	
+	    	$.ajax({
+	    		url :'b_checkPW',
+	    		data:{"pw": pw},
+	    		success : function(data){
+	    			if(data!="false"){
+		    			$("._popup").html("암호불일치")
+		    			$("._popup").append("<input type='text' size='6' id='test' onkeypress='checkPW(event)' />");
+	    			}
+	    			else{
+	    				var url = "board";    
+	    				$(location).attr('href',url);
+
+	    			}
+	    				
+	    		}
+	    	}); 
+	    	
+	    	
+	    
+	    }
+	}
+	
+	
+	
+</script>
+	
+
 	name : <c:out value="${vo.name }" /> ,
 	ip : <c:out value="vo.ip" /> , 
 	likes : <c:out value="${vo.hit }" /><br>
@@ -19,10 +100,16 @@
 				${content1 }
 	<hr>
 	<div align="right">	
-		<input type="button" value="수정">
-		<input type="button" value="삭제">
+		<input type="button" value="수정" onclick="show_popup()">
+		<input type="button" value="삭제" onclick="show_popup()">
 		<input type="button" value=" 돌아가기 " onclick="history.back()" />
+		<div align="center" class="_popup" style="width:200px;
+			height:60px; border:2px solid #777;display:none;">	 	 
+		</div>
 	</div>
+	
+	
+	
 	<hr>
 	<br>
 	<div>
@@ -41,6 +128,5 @@
 		</c:if>		
 	</div>
 	<hr>
-	
 </article>
 
