@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import model.service.BoardService;
 import model.service.CategoryService;
@@ -129,6 +129,11 @@ public class boardController {
 			
 			model.addAttribute("categories", categories);
 			
+
+				
+			
+			
+			
 			return "b_write";
 		}
 	
@@ -158,16 +163,64 @@ public class boardController {
 		}
 		
 	
-		@RequestMapping(value = "b_modify")
-		public String b_modify(Model model,@RequestParam("idx") int idx){
+		@RequestMapping(value = "b_checkPW")
+		@ResponseBody
+		public String b_checkPW(Model model,@RequestParam("idx") int idx,@RequestParam("pw")String pw,@RequestParam("whichButton")String whichButton){
+					
+//			System.out.println(idx);
+//			System.out.println(pw);
+//			System.out.println(whichButton);
 			
-			BoardVO vo = boardService.selectByIdx(idx);
-			model.addAttribute("vo", vo);
+			String bool = 
+			boardService.passwordCheck(idx, pw);
 			
-			List<CommentVO> Clist = commentService.selectList(idx);
-			model.addAttribute("clist", Clist);
+			if(bool=="true"){
+				System.out.println("get in the source");
+				if(whichButton.equals("del")){
+					System.out.println("pw is right! delete this");	
+					boardService.delete(idx);
+					bool = "board";
+				}
+				if(whichButton.equals("modi")){
+					System.out.println("pw is right! modity this");	
+					bool = "b_modi?modi=1&idx="+idx;
+				}
+				
+			}
+			
+			return bool;
+		}
+		
+		
+		@RequestMapping(value ="b_modi")
+		public String b_modi(Model model,@RequestParam int idx,@RequestParam int modi,HttpServletRequest request){
+			
+			BoardVO vo =boardService.selectByIdx(idx);
+			//System.out.println(vo);
+			//System.out.println(modi);
+			
+			b_write(request, model);
+			
+			model.addAttribute("vo",vo);
+			model.addAttribute("modi", modi);
 			
 			return "b_write";
+		}
+		
+		@RequestMapping(value ="b_modiView")
+		public String b_modiView(Model model,@RequestParam int idx,@RequestParam int modi,
+				@ModelAttribute BoardVO vo,HttpServletRequest request){
+			
+			vo.setIp(request.getRemoteAddr());
+			if(vo.getSavefile()==null){
+				vo.setSavefile(" ");
+				vo.setOrigfile(" ");
+			}
+			System.out.println(vo);
+			boardService.update(vo);
+			b_view(model, idx);
+					
+			return "b_view";
 		}
 		
 		

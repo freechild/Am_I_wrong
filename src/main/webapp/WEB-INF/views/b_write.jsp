@@ -33,15 +33,30 @@
 
 <article>
 	<div align="center">
+		<c:if test="${!empty modi }">
+		<form action="b_modiView" onsubmit="return formCheck(this);">
+		<input type="hidden" value="${modi }" name="modi">
+		<input type="hidden" value="${vo.idx }" name="idx">
+		</c:if>
+		<c:if test="${empty modi }">
 		<form action="b_writeOk?p=1&s=${p }&b=${b}" onsubmit="return formCheck(this);">
 		<input type="hidden" value="${p }" name="s">
 		<input type="hidden" value="${b }" name="b">
+		</c:if>
 			<table>
 
 				<tr>
 					<th>제&nbsp;&nbsp;&nbsp;&nbsp;목</th>
-					<td><input type="text" name="title" size="50" maxlength="100"
-						class="boxTF" /></td>
+					<td>
+						<c:if test="${!empty modi}">
+							<input type="text" name="title" size="50" maxlength="100" class="boxTF"
+							value="${vo.title }" />
+						</c:if>
+						
+						<c:if test="${empty modi }">
+							<input type="text" name="title" size="50" maxlength="100" class="boxTF" />
+						</c:if>
+					</td>
 				</tr>
 				<tr>
 					<th align="center">카테고리 선택</th>
@@ -59,21 +74,45 @@
 				<tr>
 
 					<th>작성자</th>
-					<td><input type="text" name="name" size="35" maxlength="20"
-						class="boxTF" /></td>
+					<td>
+						<c:if test="${!empty modi}">
+							<input type="text" name="name" size="35" maxlength="20" class="boxTF" 
+							value="${vo.name }" readonly="readonly"/>
+						</c:if>
+						<c:if test="${empty modi }">
+							<input type="text" name="name" size="35" maxlength="20" class="boxTF" />
+						</c:if>
+					
+					</td>
+				
 				</tr>
 				<tr>
 
 					<th>E-Mail</th>
-					<td><input type="text" name="email" size="35" maxlength="50"
-						class="boxTF" /></td>
+					<td>
+						<c:if test="${!empty modi }">
+							<input type="text" name="email" size="35" maxlength="50"
+							 	value="${vo.email }" class="boxTF" />						
+						</c:if>
+						<c:if test="${empty modi }">
+							<input type="text" name="email" size="35" maxlength="50"
+								class="boxTF" />						
+						</c:if>
+					</td>
 
 				</tr>
 
 				<tr>
 
 					<th>내&nbsp;&nbsp;&nbsp;&nbsp;용</th>
-					<td><textarea name="content" cols="63" rows="12" class="boxTA"></textarea></td>
+					<td>
+						<c:if test="${!empty modi }">
+							<textarea name="content" cols="63" rows="12" class="boxTA" >${vo.content }</textarea>
+						</c:if>
+						<c:if test="${empty modi }">
+							<textarea name="content" cols="63" rows="12" class="boxTA"></textarea>
+						</c:if>	
+					</td>
 
 				</tr>
 				<tr>

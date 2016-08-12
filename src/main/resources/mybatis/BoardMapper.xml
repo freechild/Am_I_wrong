@@ -30,10 +30,10 @@
 	<insert id="insert" parameterType="BoardVO">
 		
 		insert into board
-			(idx,categoryid,name,pw,title,content,ip,savefile,origfile)
+			(idx,categoryid,name,pw,title,content,ip,savefile,origfile,email)
 		values
 			(board_idx_seq.nextval,#{categoryid},#{name},#{pw},
-			 #{title},#{content},#{ip},#{savefile},#{origfile})
+			 #{title},#{content},#{ip},#{savefile},#{origfile},#{email})
 	
 	</insert>
 	<!-- 고치기 -->
@@ -42,9 +42,14 @@
 			update 
 				board 
 			set
-				subject=#{subject},
+				categoryid =#{categoryid},
+				pw =#{pw},
+				title=#{title},
 				content=#{content},
 				ip=#{ip},
+				savefile=#{savefile},
+				origfile=#{origfile},
+				email = ${email},
 				regdate=SYSDATE
 			where 
 				idx=#{idx}

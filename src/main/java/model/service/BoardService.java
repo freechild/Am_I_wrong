@@ -96,6 +96,52 @@ public class BoardService {
 	}
 	
 	
+	public String passwordCheck (int idx,String pw){
+		String flag = "false";
+		
+		try {
+			BoardVO vo =
+			boardDao.selectByIdx(idx);
+			if(vo==null){
+				
+				System.out.println("<passwordCheck> vo not exist");
+			}
+			else if(vo!=null){
+				if(!vo.getPw().equals(pw)){	
+					System.out.println("<passwordCheck> password not match");
+					System.out.println(pw);
+					System.out.println(vo.getPw());
+					
+				}
+				else if(vo.getPw().equals(pw)){
+					flag="true";
+				}
+			}
+				
+		} catch (Exception e) {
+			
+			System.out.println("<passwordCheck> error");
+		}
+		//System.out.println(flag);
+		return flag;
+	}
+	
+	public void delete(int idx){
+		boardDao.delete(idx);
+	}
+	
+	public void update(BoardVO vo){
+		int result =0;
+		
+		try {
+			boardDao.update(vo);
+			
+		} catch (Exception e) {
+			result=1;
+		}
+		
+		System.out.println(result);
+	}
 }
 
 

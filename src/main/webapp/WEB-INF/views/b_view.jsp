@@ -40,11 +40,17 @@
 
 
 /* 레이어 보이기*/
-	function show_popup()
+	
+	var whichButton;
+	
+	function show_popup(obj)
 	{
+		whichButton = $('#'+obj).attr("id");
+		
 	    $('._popup').show("fast");
 	    $("._popup").html("비밀번호 입력 & enter<br>");
-	    $("._popup").append("<input type='text' size='6' id='test' onkeypress='checkPW(event)' />");
+	    $("._popup").append("<input type='text' size='6' id='password' onkeypress='checkPW(event)' />");
+	    $("#password").focus();
 	}
 
 	function checkPW(event){
@@ -57,20 +63,30 @@
 	 
 	    //console.log(keyCode);
 	    if(keyCode==13){
-	    	var pw = $("#test ").val(); 
+	    	var pw = $("#password ").val(); 
+	    	var idx = "${vo.idx}";
 			//alert(pw);	    	    	
 	    	
 	    	$.ajax({
 	    		url :'b_checkPW',
-	    		data:{"pw": pw},
+	    		data:
+	    		{
+	    			"pw": pw ,
+	    			"idx":idx,
+	    			"whichButton":whichButton
+	    			
+	    		},
 	    		success : function(data){
-	    			if(data!="false"){
-		    			$("._popup").html("암호불일치")
-		    			$("._popup").append("<input type='text' size='6' id='test' onkeypress='checkPW(event)' />");
+	    			if(data=="false"){
+		    			$("._popup").html("암호불일치<br>");
+		    			$("._popup").append("<input type='text' size='6' id='password' onkeypress='checkPW(event)' />");
+	    			 	$("#password").focus();
 	    			}
 	    			else{
-	    				var url = "board";    
+	    			
+	    				var url = data;    
 	    				$(location).attr('href',url);
+	    				
 
 	    			}
 	    				
@@ -82,13 +98,11 @@
 	    }
 	}
 	
-	
-	
 </script>
 	
 
 	name : <c:out value="${vo.name }" /> ,
-	ip : <c:out value="vo.ip" /> , 
+	ip : <c:out value="${vo.ip }" /> , 
 	likes : <c:out value="${vo.hit }" /><br>
 	title : <c:out value="${vo.title }" /> ,
 	Date : <fmt:formatDate value="${vo.regdate }"/>   ->
@@ -100,8 +114,8 @@
 				${content1 }
 	<hr>
 	<div align="right">	
-		<input type="button" value="수정" onclick="show_popup()">
-		<input type="button" value="삭제" onclick="show_popup()">
+		<input type="button" value="수정" id ="modi" onclick="show_popup('modi')">
+		<input type="button" value="삭제" id ="del" onclick="show_popup('del')">
 		<input type="button" value=" 돌아가기 " onclick="history.back()" />
 		<div align="center" class="_popup" style="width:200px;
 			height:60px; border:2px solid #777;display:none;">	 	 
@@ -128,5 +142,11 @@
 		</c:if>		
 	</div>
 	<hr>
+	<form action="" id="comment">
+		name : <input type="text" size="7">  pw : <input type="text" size="7"> <br>
+		댓글 : <input type="text" size="20px"><hr>
+		<input type="submit" value="전송">
+		
+	</form>
 </article>
 
