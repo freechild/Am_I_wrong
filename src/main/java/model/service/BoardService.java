@@ -67,6 +67,7 @@ public class BoardService {
 			boardDao.insert(vo);
 		} catch (Exception e) {
 			result=1;
+			e.printStackTrace();
 		}		
 		
 		System.out.println("service : "+result);

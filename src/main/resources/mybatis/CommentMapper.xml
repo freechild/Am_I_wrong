@@ -10,9 +10,9 @@
  
  	<insert id="insert" parameterType="CommentVO">
  		insert into comments
- 			(idx,ref,name,password,content)
+ 			(idx,ref,name,pw,content)
  		values
- 			(comment_idx_seq.nextval,#{ref},#{name},#{password},#{content})
+ 			(comment_idx_seq.nextval,#{ref},#{name},#{pw},#{content})
  	</insert>
  	
  	<update id="update" parameterType="CommentVO">

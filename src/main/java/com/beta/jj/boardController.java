@@ -145,7 +145,7 @@ public class boardController {
 			
 			List<CommentVO> Clist = commentService.selectList(idx);
 			model.addAttribute("clist", Clist);
-			
+			System.out.println(Clist);
 			return "b_view";
 		}
 	
@@ -223,5 +223,14 @@ public class boardController {
 			return "b_view";
 		}
 		
+		@RequestMapping(value ="b_comment")
+		@ResponseBody
+		public String b_comment(@ModelAttribute CommentVO vo){
+			
+			commentService.insert(vo);
+//			System.out.println(vo);
+				
+			return "b_view?idx="+vo.getRef();
+		}
 		
 }

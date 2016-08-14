@@ -37,6 +37,8 @@ public class CommentService {
 			commentDAO.insert(vo);
 		} catch (Exception e) {
 			result=1;
+			e.printStackTrace();
+			System.out.println(result);
 		}
 		return result;
 	}
@@ -58,12 +60,14 @@ public class CommentService {
 		}
 		return list;
 	}
+	
+	
 	public int update(CommentVO vo){
 		int result=0;
 		try {
 			CommentVO dbvo = commentDAO.selectByIdx(vo.getIdx());
 			if(dbvo!=null)
-				if(dbvo.getPassword().equals(vo.getPassword()))
+				if(dbvo.getPw().equals(vo.getPw()))
 					commentDAO.update(dbvo);
 				else
 					result =1;
@@ -79,7 +83,7 @@ public class CommentService {
 		try {
 			CommentVO dbvo = commentDAO.selectByIdx(vo.getIdx());
 			if(dbvo!=null)
-				if(dbvo.getPassword().equals(vo.getPassword()))
+				if(dbvo.getPw().equals(vo.getPw()))
 					commentDAO.update(dbvo);
 				else
 					result =1;

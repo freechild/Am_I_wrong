@@ -6,7 +6,7 @@ public class CommentVO {
 	private int idx;
 	private int ref;
 	private String name;
-	private String password;
+	private String pw;
 	private String content;
 	private Date regdate;
 	
@@ -28,11 +28,11 @@ public class CommentVO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getPassword() {
-		return password;
+	public String getPw() {
+		return pw;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPw(String pw) {
+		this.pw = pw;
 	}
 	public String getContent() {
 		return content;
@@ -48,7 +48,7 @@ public class CommentVO {
 	}
 	@Override
 	public String toString() {
-		return "CommentVO [idx=" + idx + ", ref=" + ref + ", name=" + name + ", password=" + password + ", content="
+		return "CommentVO [idx=" + idx + ", ref=" + ref + ", name=" + name + ", pw=" + pw + ", content="
 				+ content + ", regdate=" + regdate + "]";
 	}
 	

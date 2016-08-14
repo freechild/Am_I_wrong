@@ -9,20 +9,20 @@
 <jsp:include page="index.jsp" />
 
 <article>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 <script type="text/javascript">
 	/*레이어 밖 누르면 감추기*/
 	$(document).ready(function(){
 		$(document).mousedown(function(e){
 		$('._popup').each(function(){
-		        if( $(this).css('display') == 'block' )
+		        if ( $(this).css('display') == 'block' )
 		        {
 		            var l_position = $(this).offset();
 		            l_position.right = parseInt(l_position.left) + ($(this).width());
 		            l_position.bottom = parseInt(l_position.top) + parseInt($(this).height());
 	
 	
-		            if( ( l_position.left <= e.pageX && e.pageX <= l_position.right )
+		            if ( ( l_position.left <= e.pageX && e.pageX <= l_position.right )
 		                && ( l_position.top <= e.pageY && e.pageY <= l_position.bottom ) )
 		            {
 		                //alert( 'popup in click' );
@@ -35,9 +35,27 @@
 		        }
 		        
 		    });
-		}); 
+		});
+		$(".comment_V").html("<c:if test='${empty clist }'>");
+		$(".comment_V").append("댓글이 없습니다.");
+		$(".comment_V").append("</c:if>");
+		$(".comment_V").append("<c:if test='${! empty clist }'>");
+		$(".comment_V").append("<c:forEach var='c' items='clist'>");
+		$(".comment_V").append("<c:out value='${c.name }' />");
+		$(".comment_V").append("<fmt:formatDate value='${c.regdate }' /> <br>");
+		$(".comment_V").append("<c:set var ='content2' value='${c.content } '/>");
+		$(".comment_V").append("<c:set var='content2' value='${fn:replace(content2,'<','&lt;') }'/>");
+		$(".comment_V").append("<c:set var='content2' value='${fn:replace(content2,newLine,br) }'/>");
+		$(".comment_V").append("${content2 }");
+		$(".comment_V").append("</c:forEach>");
+		$(".comment_V").append("</c:if>	");
+		
+		
 	})
 
+	
+	
+	
 
 /* 레이어 보이기*/
 	
@@ -62,12 +80,13 @@
 	    keyCode = event.keyCode || which;
 	 
 	    //console.log(keyCode);
-	    if(keyCode==13){
+	    if (keyCode==13){
 	    	var pw = $("#password ").val(); 
 	    	var idx = "${vo.idx}";
 			//alert(pw);	    	    	
 	    	
 	    	$.ajax({
+	    		type : "GET",
 	    		url :'b_checkPW',
 	    		data:
 	    		{
@@ -75,28 +94,45 @@
 	    			"idx":idx,
 	    			"whichButton":whichButton
 	    			
-	    		},
-	    		success : function(data){
-	    			if(data=="false"){
-		    			$("._popup").html("암호불일치<br>");
-		    			$("._popup").append("<input type='text' size='6' id='password' onkeypress='checkPW(event)' />");
-	    			 	$("#password").focus();
-	    			}
-	    			else{
-	    			
-	    				var url = data;    
-	    				$(location).attr('href',url);
-	    				
-
-	    			}
-	    				
 	    		}
-	    	}); 
-	    	
-	    	
-	    
+	    	}).done(function(data){
+    			if (data=="false"){
+	    			$("._popup").html("암호불일치<br>");
+	    			$("._popup").append("<input type='text' size='6' id='password' onkeypress='checkPW(event)' />");
+    			 	$("#password").focus();
+    			} else {
+    				var url = data;    
+    				$(location).attr('href',url);
+    			}
+	    	});
+
 	    }
 	}
+	
+	
+	function comments(){
+		var name = $(".comment_W input[name='name']").val();
+		var pw = $(".comment_W input[name='pw']").val();
+		var content = $(".comment_W input[name='content']").val();
+		var ref = ${vo.idx};
+		
+		$.ajax({
+			url: "b_comment",
+			data :
+			{
+				"name" : name,
+				"ref" : ref,
+				"pw" : pw,
+				"content" : content
+			}
+		}).done(function(data){
+			var url = data;    
+			$(location).attr('href',url);
+		});
+		
+		
+	}
+	
 	
 </script>
 	
@@ -126,27 +162,16 @@
 	
 	<hr>
 	<br>
-	<div>
-		<c:if test="${empty clist }">
-			댓글이 없습니다.${cid }
-		</c:if>
-		<c:if test="${! empty clist }">
-			<c:forEach var="c" items="clist">
-				<c:out value="${c.name }" />
-				<fmt:formatDate value="${c.regdate }" /> <br>
-				<c:set var ="content2" value="${c.content } "/>
-				<c:set var="content2" value="${fn:replace(content1,'<','&lt;') }"/>
-				<c:set var="content2" value="${fn:replace(content1,newLine,br) }"/>
-				${content2 }
-			</c:forEach>
-		</c:if>		
+	<div class="comment_V">
+		
 	</div>
 	<hr>
-	<form action="" id="comment">
-		name : <input type="text" size="7">  pw : <input type="text" size="7"> <br>
-		댓글 : <input type="text" size="20px"><hr>
-		<input type="submit" value="전송">
-		
-	</form>
+	<div class="comment_W">
+		name : <input type="text" name="name" size="7">  pw : <input type="text" name="pw" size="7"> <br>
+		댓글 : <input type="text" name="content" size="20px"><hr>
+		<input type="button" value="전송" onclick="comments()">
+	
+	</div>
+	
 </article>
 
