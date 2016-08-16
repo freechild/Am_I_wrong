@@ -83,10 +83,6 @@ public class boardController {
 			int categoryId = map.get("categoryId");
 			//cid
 			
-			String search = request.getParameter("search");
-			if(search!=null)
-				model.addAttribute("search", search);
-			
 			model.addAttribute("p", currentPage);
 			model.addAttribute("s", pageSize);
 			model.addAttribute("b", blockSize);
@@ -96,6 +92,8 @@ public class boardController {
 			boardService.selectList(currentPage, pageSize, blockSize, categoryId);
 			List<CategoryVO>categories =
 			categoryService.getCategories();
+			
+			
 			
 			
 			model.addAttribute("board", board);
@@ -232,5 +230,41 @@ public class boardController {
 				
 			return "b_view?idx="+vo.getRef();
 		}
+		
+		@RequestMapping(value ="b_search")
+		public String b_search(Model model,HttpServletRequest request,
+				@RequestParam String search,@RequestParam String searchContent){
+			
+			HashMap<String, Integer> map =pagingProcess.pagingProcess(request);
+			
+			
+			int currentPage = map.get("currentPage");
+			//p
+			int pageSize = map.get("pageSize");
+			//s
+			int blockSize = map.get("blockSize");
+			//b
+			int categoryId = map.get("categoryId");
+			//cid
+			
+			
+			model.addAttribute("p", currentPage);
+			model.addAttribute("s", pageSize);
+			model.addAttribute("b", blockSize);
+			model.addAttribute("cid", categoryId);
+			
+			PagingList<BoardVO> board =
+			boardService.selectSearch(currentPage, pageSize, blockSize, categoryId, search, searchContent);
+			List<CategoryVO>categories =
+					categoryService.getCategories();
+					
+			model.addAttribute("board", board);
+			model.addAttribute("categories", categories);
+			
+			
+			
+			return "board";
+		}
+		
 		
 }

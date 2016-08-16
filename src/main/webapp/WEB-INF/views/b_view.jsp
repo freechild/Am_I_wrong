@@ -36,21 +36,6 @@
 		        
 		    });
 		});
-		$(".comment_V").html("<c:if test='${empty clist }'>");
-		$(".comment_V").append("´ñ±ÛÀÌ ¾ø½À´Ï´Ù.");
-		$(".comment_V").append("</c:if>");
-		$(".comment_V").append("<c:if test='${! empty clist }'>");
-		$(".comment_V").append("<c:forEach var='c' items='clist'>");
-		$(".comment_V").append("<c:out value='${c.name }' />");
-		$(".comment_V").append("<fmt:formatDate value='${c.regdate }' /> <br>");
-		$(".comment_V").append("<c:set var ='content2' value='${c.content } '/>");
-		$(".comment_V").append("<c:set var='content2' value='${fn:replace(content2,'<','&lt;') }'/>");
-		$(".comment_V").append("<c:set var='content2' value='${fn:replace(content2,newLine,br) }'/>");
-		$(".comment_V").append("${content2 }");
-		$(".comment_V").append("</c:forEach>");
-		$(".comment_V").append("</c:if>	");
-		
-		
 	})
 
 	
@@ -125,9 +110,10 @@
 				"pw" : pw,
 				"content" : content
 			}
-		}).done(function(data){
+		}).done(function(data){		
 			var url = data;    
 			$(location).attr('href',url);
+			//$(".comment_V").html(data);
 		});
 		
 		
@@ -142,7 +128,7 @@
 	likes : <c:out value="${vo.hit }" /><br>
 	title : <c:out value="${vo.title }" /> ,
 	Date : <fmt:formatDate value="${vo.regdate }"/>   ->
-	${category }<hr>
+	<hr>
 	
 	<c:set var ="content1" value="${vo.content } "/>
 				<c:set var="content1" value="${fn:replace(content1,'<','&lt;') }"/>
@@ -163,9 +149,23 @@
 	<hr>
 	<br>
 	<div class="comment_V">
-		
+		<c:if test="${empty clist }">
+			µî·ÏµÈ ´ñ±ÛÀÌ ¾ø½À´Ï´Ù.
+		</c:if>
+		<c:if test="${!empty clist }">
+			<c:forEach var="c" items="${clist }" varStatus="s">
+				±Û¾´ÀÌ :<c:out value="${c.name }" /> /
+				µî·ÏÀÏ: <fmt:formatDate value="${c.regdate }"/> <br>
+				´ñ±Û :<c:set var ="content" value="${c.content } "/>
+				<c:set var="content" value="${fn:replace(content,'<','&lt;') }"/>
+				<c:set var="content" value="${fn:replace(content,newLine,br) }"/>
+				${content }<br>
+				
+			</c:forEach>
+		</c:if>
 	</div>
 	<hr>
+			${idx }
 	<div class="comment_W">
 		name : <input type="text" name="name" size="7">  pw : <input type="text" name="pw" size="7"> <br>
 		´ñ±Û : <input type="text" name="content" size="20px"><hr>

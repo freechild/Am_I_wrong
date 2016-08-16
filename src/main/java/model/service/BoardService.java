@@ -55,6 +55,7 @@ public class BoardService {
 					board.getEndNo(), categoryid, search, searchContent));
 			
 		} catch (Exception e) {
+			System.out.println("search error");
 			e.printStackTrace();
 		}
 		

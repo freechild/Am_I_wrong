@@ -34,7 +34,7 @@
  	</select>
 
  	<select id="selectList" parameterType="int" resultType="CommentVO">
- 		select * from comments where ref=#{ref}
+ 		select * from comments where ref=#{ref} ORDER BY regdate DESC
  	</select>
  	
  	
