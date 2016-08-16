@@ -17,7 +17,7 @@ public class PagingProcess {
 		// s
 		int blockSize;
 		// b
-		int categoryId;
+		int categoryid;
 		
 		
 		try {
@@ -40,16 +40,16 @@ public class PagingProcess {
 		}
 
 		try {
-			categoryId = Integer.parseInt(request.getParameter("cid"));
+			categoryid = Integer.parseInt(request.getParameter("cid"));
 		} catch (Exception e) {
-			categoryId = 0;
+			categoryid = 0;
 		}
 
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put("currentPage", currentPage);
 		map.put("pageSize", pageSize);
 		map.put("blockSize", blockSize);
-		map.put("categoryId", categoryId);
+		map.put("categoryid", categoryid);
 
 		return map;
 	}

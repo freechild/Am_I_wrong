@@ -30,11 +30,15 @@ public class BoardService {
 		try {
 			int categoryCount = categoryDao.getCount();
 			if(categoryid < 0 || categoryid > categoryCount) categoryid=0;
+			
+			System.out.println(categoryid);
 			int totalCount = boardDao.getCount(categoryid);
+			System.out.println(boardDao.getCount(categoryid));
 			board = new PagingList<BoardVO>(totalCount, currentPage, pageSize, blockSize);
+			
 			board.setList(boardDao.selectList(board.getStartNo(), 
 					board.getEndNo(), categoryid));
-			
+			System.out.println(board.getTotalCount());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
@@ -127,6 +131,8 @@ public class BoardService {
 		//System.out.println(flag);
 		return flag;
 	}
+	
+	
 	
 	public void delete(int idx){
 		boardDao.delete(idx);

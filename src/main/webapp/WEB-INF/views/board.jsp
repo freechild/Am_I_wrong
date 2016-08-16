@@ -4,7 +4,11 @@
 <!DOCTYPE html>
 <jsp:include page="index.jsp" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-
+<script>
+function categoryChange(value){
+	$(location).attr('href',"b_category?value="+value);
+}
+</script>
 <article class="pagewidth" >
 	<div align="center">
 		<table class="board"  border="1" style="border:none;" >

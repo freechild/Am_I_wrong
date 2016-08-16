@@ -24,8 +24,8 @@ public class BoardDAO {
 	
 	// 개수얻기
 	public int getCount(int categoryid){
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
-		map.put("categoryid", categoryid);
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("categoryid", categoryid+"");
 		return session.selectOne("board.getCount",map);
 	}
 	public int getCount(int categoryid,String search,String searchContent){

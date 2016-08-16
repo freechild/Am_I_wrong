@@ -6,11 +6,11 @@
 	
 	<!-- 개수 얻기 -->
 	<select id="getCount" parameterType="java.util.HashMap" resultType="int">
-		<![CDATA[
+		
 		select count(idx) from board
-		]]>
+		
 		<where> 
-		 	<if test="categoryid>'0' ">
+		 	<if test="categoryid>'0'">
 				categoryid=TO_NUMBER(#{categoryid })
 			</if>
 		 	
@@ -20,11 +20,12 @@
 				</if>
 				<if test="search=='all'">
 					AND (name LIKE '%'||#{searchContent}||'%'
-					OR title LIKE '%'||#{searchContent}||'%'
+					OR subject LIKE '%'||#{searchContent}||'%'
 					OR content LIKE '%'||#{searchContent}||'%')
 				</if>
 			</if>
 		</where>
+		
 	</select>
 	<!-- 넣기 -->
 	<insert id="insert" parameterType="BoardVO">

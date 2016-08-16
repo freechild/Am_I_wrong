@@ -27,7 +27,7 @@ import model.vo.PagingList;
 
 
 @Controller
-public class boardController {
+public class BoardController {
 	
 	
 		
@@ -80,16 +80,16 @@ public class boardController {
 			//s
 			int blockSize = map.get("blockSize");
 			//b
-			int categoryId = map.get("categoryId");
+			int categoryid = map.get("categoryid");
 			//cid
 			
 			model.addAttribute("p", currentPage);
 			model.addAttribute("s", pageSize);
 			model.addAttribute("b", blockSize);
-			model.addAttribute("cid", categoryId);
+			model.addAttribute("cid", categoryid);
 			
 			PagingList<BoardVO> board =
-			boardService.selectList(currentPage, pageSize, blockSize, categoryId);
+			boardService.selectList(currentPage, pageSize, blockSize, categoryid);
 			List<CategoryVO>categories =
 			categoryService.getCategories();
 			
@@ -115,31 +115,41 @@ public class boardController {
 			//s
 			int blockSize = map.get("blockSize");
 			//b
-			int categoryId = map.get("categoryId");
+			int categoryid = map.get("categoryid");
 			//cid
 			model.addAttribute("p", currentPage);
 			model.addAttribute("s", pageSize);
 			model.addAttribute("b", blockSize);
-			model.addAttribute("cid", categoryId);
+			model.addAttribute("cid", categoryid);
 			
 			List<CategoryVO>categories =
 					categoryService.getCategories();
 			
 			model.addAttribute("categories", categories);
-			
-
-				
-			
-			
-			
+						
 			return "b_write";
 		}
 	
 		@RequestMapping(value = "b_view")
-		public String b_view(Model model,@RequestParam("idx") int idx){
+		public String b_view(Model model,@RequestParam("idx") int idx,HttpServletRequest request){
 			
 			BoardVO vo = boardService.selectByIdx(idx);
 			model.addAttribute("vo", vo);
+			
+			HashMap<String, Integer> map =pagingProcess.pagingProcess(request);
+			
+			int currentPage = map.get("currentPage");
+			//p
+			int pageSize = map.get("pageSize");
+			//s
+			int blockSize = map.get("blockSize");
+			//b
+			int categoryid = map.get("categoryid");
+			//cid
+			model.addAttribute("p", currentPage);
+			model.addAttribute("s", pageSize);
+			model.addAttribute("b", blockSize);
+			model.addAttribute("cid", categoryid);
 			
 			List<CommentVO> Clist = commentService.selectList(idx);
 			model.addAttribute("clist", Clist);
@@ -174,12 +184,12 @@ public class boardController {
 			
 			if(bool=="true"){
 				System.out.println("get in the source");
-				if(whichButton.equals("del")){
+				if(whichButton.equals("b_del")){
 					System.out.println("pw is right! delete this");	
 					boardService.delete(idx);
 					bool = "board";
 				}
-				if(whichButton.equals("modi")){
+				if(whichButton.equals("b_modi")){
 					System.out.println("pw is right! modity this");	
 					bool = "b_modi?modi=1&idx="+idx;
 				}
@@ -216,24 +226,14 @@ public class boardController {
 			}
 			System.out.println(vo);
 			boardService.update(vo);
-			b_view(model, idx);
+			b_view(model, idx, request);
 					
 			return "b_view";
 		}
 		
-		@RequestMapping(value ="b_comment")
-		@ResponseBody
-		public String b_comment(@ModelAttribute CommentVO vo){
-			
-			commentService.insert(vo);
-//			System.out.println(vo);
-				
-			return "b_view?idx="+vo.getRef();
-		}
 		
 		@RequestMapping(value ="b_search")
-		public String b_search(Model model,HttpServletRequest request,
-				@RequestParam String search,@RequestParam String searchContent){
+		public String b_search(Model model,HttpServletRequest request){
 			
 			HashMap<String, Integer> map =pagingProcess.pagingProcess(request);
 			
@@ -244,23 +244,51 @@ public class boardController {
 			//s
 			int blockSize = map.get("blockSize");
 			//b
-			int categoryId = map.get("categoryId");
+			int categoryid = map.get("categoryid");
 			//cid
 			
 			
 			model.addAttribute("p", currentPage);
 			model.addAttribute("s", pageSize);
 			model.addAttribute("b", blockSize);
-			model.addAttribute("cid", categoryId);
+			model.addAttribute("cid", categoryid);
+			
+			String search= null;
+			try{
+				search =request.getParameter("search");
+			}catch(Exception e){}
+			String searchContent = null;
+			try{
+				searchContent = request.getParameter("searchContent");
+			}catch(Exception e){}
 			
 			PagingList<BoardVO> board =
-			boardService.selectSearch(currentPage, pageSize, blockSize, categoryId, search, searchContent);
+			boardService.selectSearch(currentPage, pageSize, blockSize, categoryid, search, searchContent);
 			List<CategoryVO>categories =
 					categoryService.getCategories();
 					
 			model.addAttribute("board", board);
 			model.addAttribute("categories", categories);
 			
+			
+			
+			return "board";
+		}
+		
+		@RequestMapping(value ="b_category")
+		public String b_category(Model model,HttpServletRequest request,@RequestParam("value") int categoryid){
+			
+			
+			
+			model.addAttribute("cid",request.getParameter("value") );
+			
+			boardService.selectList(1, 5, 5, categoryid);
+			
+			
+			List<CategoryVO>categories =
+					categoryService.getCategories();
+			
+			model.addAttribute("categories", categories);
 			
 			
 			return "board";

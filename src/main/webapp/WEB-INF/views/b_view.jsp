@@ -42,7 +42,7 @@
 	
 	
 
-/* 레이어 보이기*/
+// 레이어 보이기
 	
 	var whichButton;
 	
@@ -50,12 +50,18 @@
 	{
 		whichButton = $('#'+obj).attr("id");
 		
-	    $('._popup').show("fast");
+		if(whichButton == "b_modi" || whichButton == "b_del")
+	    	$('#b_popup').show("fast");
+		else
+			$('#c_popup').show("fast");
+			
 	    $("._popup").html("비밀번호 입력 & enter<br>");
 	    $("._popup").append("<input type='text' size='6' id='password' onkeypress='checkPW(event)' />");
 	    $("#password").focus();
 	}
 
+		
+		
 	function checkPW(event){
 	    var keyCode = event.keyCode ? event.keyCode : event.which;
 	    
@@ -66,12 +72,13 @@
 	 
 	    //console.log(keyCode);
 	    if (keyCode==13){
-	    	var pw = $("#password ").val(); 
+	    	var pw = $("#password").val(); 
+	    	alert(pw)
 	    	var idx = "${vo.idx}";
 			//alert(pw);	    	    	
 	    	
 	    	$.ajax({
-	    		type : "GET",
+	    		type : 'GET',
 	    		url :'b_checkPW',
 	    		data:
 	    		{
@@ -94,6 +101,7 @@
 	    }
 	}
 	
+
 	
 	function comments(){
 		var name = $(".comment_W input[name='name']").val();
@@ -133,13 +141,13 @@
 	<c:set var ="content1" value="${vo.content } "/>
 				<c:set var="content1" value="${fn:replace(content1,'<','&lt;') }"/>
 				<c:set var="content1" value="${fn:replace(content1,newLine,br) }"/>
-				${content1 }
+				${content1 } =>${p }
 	<hr>
 	<div align="right">	
-		<input type="button" value="수정" id ="modi" onclick="show_popup('modi')">
-		<input type="button" value="삭제" id ="del" onclick="show_popup('del')">
-		<input type="button" value=" 돌아가기 " onclick="history.back()" />
-		<div align="center" class="_popup" style="width:200px;
+		<input type="button" value="수정" id ="b_modi" onclick="show_popup('b_modi')">
+		<input type="button" value="삭제" id ="b_del" onclick="show_popup('b_del')">
+		<input type="button" value=" 돌아가기 " onclick="location.href='board?p=${p}&s=${s}&b=${b}'" />
+		<div align="center" class="_popup"  id="b_popup" style="width:200px;
 			height:60px; border:2px solid #777;display:none;">	 	 
 		</div>
 	</div>
@@ -155,7 +163,9 @@
 		<c:if test="${!empty clist }">
 			<c:forEach var="c" items="${clist }" varStatus="s">
 				글쓴이 :<c:out value="${c.name }" /> /
-				등록일: <fmt:formatDate value="${c.regdate }"/> <br>
+				등록일: <fmt:formatDate value="${c.regdate }"/> 
+				<input type="button" value="수정"  id="${c.idx }" onclick="show_popup('${c.idx}')">
+				<input type="button" value="삭제"  id="${c.idx }" onclick="show_popup('${c.idx}')"><br>
 				댓글 :<c:set var ="content" value="${c.content } "/>
 				<c:set var="content" value="${fn:replace(content,'<','&lt;') }"/>
 				<c:set var="content" value="${fn:replace(content,newLine,br) }"/>
@@ -164,12 +174,17 @@
 			</c:forEach>
 		</c:if>
 	</div>
+
+	<div align="center" class="_popup" id="c_popup" style="width:200px;
+	height:60px; border:2px solid #777;display:none;">	 	 
+	</div>
 	<hr>
 			${idx }
 	<div class="comment_W">
 		name : <input type="text" name="name" size="7">  pw : <input type="text" name="pw" size="7"> <br>
 		댓글 : <input type="text" name="content" size="20px"><hr>
 		<input type="button" value="전송" onclick="comments()">
+		<input type="button" value="삭제" onclick="comments()">
 	
 	</div>
 	
