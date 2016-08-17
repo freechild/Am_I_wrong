@@ -10,10 +10,10 @@
 		select count(idx) from board
 		
 		<where> 
-		 	<if test="categoryid>'0'">
-				categoryid=TO_NUMBER(#{categoryid })
+		 	<if test='categoryid>"0"'>
+				categoryid=TO_NUMBER(#{categoryid})
 			</if>
-		 	
+		 
 			<if test="search!=null">
 				<if test="search!='all'">
 					AND ${search} LIKE '%'||#{searchContent}||'%'

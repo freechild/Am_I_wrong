@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<jsp:include page="index.jsp" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<%@ include file="include.jsp" %>
+<%@ include file="index.jsp" %>
+
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/mainIn.js"></script>
+<script src="${pageContext.request.contextPath}/resources/board.js"></script>
 <script>
-function categoryChange(value){
-	$(location).attr('href',"b_category?value="+value);
-}
 </script>
 <article class="pagewidth" >
 	<div align="center">

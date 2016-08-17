@@ -20,6 +20,7 @@ import model.service.BoardService;
 import model.service.CategoryService;
 import model.service.CommentService;
 import model.service.PagingProcess;
+import model.service.PasswordCheckLogic;
 import model.vo.BoardVO;
 import model.vo.CategoryVO;
 import model.vo.CommentVO;
@@ -37,6 +38,8 @@ public class BoardController {
 		private CategoryService categoryService;
 		@Autowired	
 		private CommentService commentService;
+		@Autowired
+		private PasswordCheckLogic passwordCheckLogic;
 		
 		public BoardService getBoardService() {
 			return boardService;
@@ -173,23 +176,23 @@ public class BoardController {
 	
 		@RequestMapping(value = "b_checkPW")
 		@ResponseBody
-		public String b_checkPW(Model model,@RequestParam("idx") int idx,@RequestParam("pw")String pw,@RequestParam("whichButton")String whichButton){
+		public String b_checkPW(Model model,@RequestParam("idx") int idx,@RequestParam("pw")String pw,@RequestParam("whichBtn")String whichBtn){
 					
 //			System.out.println(idx);
 //			System.out.println(pw);
 //			System.out.println(whichButton);
 			
 			String bool = 
-			boardService.passwordCheck(idx, pw);
+			passwordCheckLogic.passwordCheck(idx, pw);
 			
 			if(bool=="true"){
 				System.out.println("get in the source");
-				if(whichButton.equals("b_del")){
+				if(whichBtn.equals("b_del")){
 					System.out.println("pw is right! delete this");	
 					boardService.delete(idx);
 					bool = "board";
 				}
-				if(whichButton.equals("b_modi")){
+				if(whichBtn.equals("b_modi")){
 					System.out.println("pw is right! modity this");	
 					bool = "b_modi?modi=1&idx="+idx;
 				}
@@ -224,7 +227,7 @@ public class BoardController {
 				vo.setSavefile(" ");
 				vo.setOrigfile(" ");
 			}
-			System.out.println(vo);
+			//System.out.println(vo);
 			boardService.update(vo);
 			b_view(model, idx, request);
 					

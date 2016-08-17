@@ -26,6 +26,7 @@ public class BoardDAO {
 	public int getCount(int categoryid){
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("categoryid", categoryid+"");
+		System.out.println("cid = "+categoryid+", total = "+session.selectOne("board.getCount",map));
 		return session.selectOne("board.getCount",map);
 	}
 	public int getCount(int categoryid,String search,String searchContent){

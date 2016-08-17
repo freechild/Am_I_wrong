@@ -383,11 +383,11 @@ h1, h2, p, a, span{
 				height: 330px;
 			}
 				.account .titular {
-					padding: 10px 0;
+					padding: 4px 0;
 				}
 				.sign-in.button {
 					background: #e64c65;
-					margin: 10px auto;
+					margin: 5px auto;
 				}
 					.sign-in.button:hover {
 						background: #cc324b;

@@ -1,17 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"> -->
+
 <!DOCTYPE html>
 <html>
-<script type="text/javascript">
-
-	
-
-</script>
+<!-- IE -호환성 문제 해결 -->
+ <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+ <meta http-equiv="Content-Script-Type" content="text/javascript">
+ <meta http-equiv="Content-Style-Type" content="text/css">
+ 
+ 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/mainIn.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/styles.css" />
 </head>
-<body>
 
+<body>
+	
+	<div id="joinUs" style="display:none;">
+		
+	</div>
 	<div class="main-container">
 
 		<!-- HEADER -->
@@ -64,9 +74,6 @@
 
 
 
-
-
-
 			<!-- RIGHT-CONTAINER -->
 			<div class="right-container container">
 				<!-- 전체 움직이는 로그인부분 테이블 감싸야함 -->
@@ -74,6 +81,9 @@
 				<div class="account block">
 					<!-- ACCOUNT (RIGHT-CONTAINER) -->
 					<h2 class="titular">SIGN IN TO YOUR ACCOUNT</h2>
+					<p align="center" style="margin-top:0px">
+						<a href="javascript:showPopup();">IF YOU WANT TO JOIN US</a>
+					</p>
 					<div class="input-container">
 						<input type="text" placeholder="E-mail" id="login"
 							class="email text-input">

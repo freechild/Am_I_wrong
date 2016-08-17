@@ -9,6 +9,12 @@
 
 
 <script>
+jQuery.fn.center = function () {
+    this.css("position","absolute");
+    this.css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) + $(window).scrollTop()) + "px");
+    this.css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) + $(window).scrollLeft()) + "px");
+    return this;
+}
 
 
 /* 마우스 다운 이벤트 시에
@@ -45,7 +51,9 @@ $('._popup').each(function(){
 */
 function show_popup()
 {
+	$('.layer').show("fast");
     $('._popup').show("fast");
+    $('._popup').center();
 }
 
 
@@ -58,7 +66,12 @@ function show_popup()
 <br>
 <hr>
 <br>
-<div class="_popup" style="width:100px;height:150px; border:2px solid #777;display:none;">
+<div class="layer"
+		style="position: absolute; z-index: 9; width: 100%; height: 100%; left: 0px; top: 0px; display: none; background-color:red ; filter: alpha(opacity = 60); opacity: .6;">
+		<!-- 페이지전체영역입니다. -->
+</div>
+dsadsadsadsadsadsadasd
+<div class="_popup" style="position: absolute; z-index: 10; width: 200px; height: 200px; left: 50px; top: 50px; display: none; background-color: green">
     저는 팝업창 입니다.
  <input type="text" id="test"> 
 </div>

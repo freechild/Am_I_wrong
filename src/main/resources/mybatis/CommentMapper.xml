@@ -15,21 +15,12 @@
  			(comment_idx_seq.nextval,#{ref},#{name},#{pw},#{content})
  	</insert>
  	
- 	<update id="update" parameterType="CommentVO">
- 		update 
- 			comments
- 		set
- 			content=#{content},
- 			regdate=SYSDATE
- 		where
- 			idx=#{idx}
- 	</update>
  	
  	<delete id="delete" parameterType="int">
  		delete from comments where idx=#{idx}
  	</delete>
  	
- 	<select id="selectByIdx" parameterType="int">
+ 	<select id="selectByIdx" parameterType="int" resultType="CommentVO">
  		select * from comments where idx=#{idx}
  	</select>
 

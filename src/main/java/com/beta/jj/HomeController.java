@@ -32,17 +32,22 @@ public class HomeController {
 	@RequestMapping(value = "test", method = RequestMethod.GET)
 	public String test(Locale locale, Model model) {
 		
-		return "test";
+		return "test/test";
 	}
 	@RequestMapping(value = "test2", method = RequestMethod.GET)
 	public String test2( Model model) {
 		
-		return "test2";
+		return "test/test2";
 	}
 	@RequestMapping(value = "test3", method = RequestMethod.GET)
 	public String test3(Model model) {
 		
-		return "test3";
+		return "test/test3";
+	}
+	@RequestMapping(value = "test4", method = RequestMethod.GET)
+	public String test4(Model model) {
+		
+		return "test/test4";
 	}
 	
 }

@@ -66,18 +66,11 @@ public class CommentService {
 	
 	
 	public int update(CommentVO vo){
-		int result=0;
-		try {
-			CommentVO dbvo = commentDAO.selectByIdx(vo.getIdx());
-			if(dbvo!=null)
-				if(dbvo.getPw().equals(vo.getPw()))
-					commentDAO.update(dbvo);
-				else
-					result =1;
-			else
-				result=2;
-		} catch (Exception e) {
-			result=3;
+		int result = 0;
+		try{
+			commentDAO.update(vo);
+		}catch(Exception e){
+			result = 1;
 		}
 		return result;
 	}

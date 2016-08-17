@@ -1,136 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<!DOCTYPE html >
-
-
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="include.jsp" %>
 <jsp:include page="index.jsp" />
 
 <article>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/mainIn.js"></script>
+<script src="${pageContext.request.contextPath}/resources/b_view.js" ></script>
 <script type="text/javascript">
-	/*∑π¿ÃæÓ π€ ¥©∏£∏È ∞®√ﬂ±‚*/
-	$(document).ready(function(){
-		$(document).mousedown(function(e){
-		$('._popup').each(function(){
-		        if ( $(this).css('display') == 'block' )
-		        {
-		            var l_position = $(this).offset();
-		            l_position.right = parseInt(l_position.left) + ($(this).width());
-		            l_position.bottom = parseInt(l_position.top) + parseInt($(this).height());
-	
-	
-		            if ( ( l_position.left <= e.pageX && e.pageX <= l_position.right )
-		                && ( l_position.top <= e.pageY && e.pageY <= l_position.bottom ) )
-		            {
-		                //alert( 'popup in click' );
-		            }
-		            else
-		            {
-		                //alert( 'popup out click' );
-		                $(this).hide("fast");
-		            }
-		        }
-		        
-		    });
-		});
-	})
 
-	
-	
-	
-
-// ∑π¿ÃæÓ ∫∏¿Ã±‚
-	
-	var whichButton;
-	
-	function show_popup(obj)
-	{
-		whichButton = $('#'+obj).attr("id");
-		
-		if(whichButton == "b_modi" || whichButton == "b_del")
-	    	$('#b_popup').show("fast");
-		else
-			$('#c_popup').show("fast");
-			
-	    $("._popup").html("∫Òπ–π¯»£ ¿‘∑¬ & enter<br>");
-	    $("._popup").append("<input type='text' size='6' id='password' onkeypress='checkPW(event)' />");
-	    $("#password").focus();
-	}
-
-		
-		
-	function checkPW(event){
-	    var keyCode = event.keyCode ? event.keyCode : event.which;
-	    
-	    // keyCode∞° 0¿Ã∏È which ∏Æ≈œ
-	    
-	    // »§¿∫
-	    keyCode = event.keyCode || which;
-	 
-	    //console.log(keyCode);
-	    if (keyCode==13){
-	    	var pw = $("#password").val(); 
-	    	alert(pw)
-	    	var idx = "${vo.idx}";
-			//alert(pw);	    	    	
-	    	
-	    	$.ajax({
-	    		type : 'GET',
-	    		url :'b_checkPW',
-	    		data:
-	    		{
-	    			"pw": pw ,
-	    			"idx":idx,
-	    			"whichButton":whichButton
-	    			
-	    		}
-	    	}).done(function(data){
-    			if (data=="false"){
-	    			$("._popup").html("æœ»£∫“¿œƒ°<br>");
-	    			$("._popup").append("<input type='text' size='6' id='password' onkeypress='checkPW(event)' />");
-    			 	$("#password").focus();
-    			} else {
-    				var url = data;    
-    				$(location).attr('href',url);
-    			}
-	    	});
-
-	    }
-	}
-	
-
-	
-	function comments(){
-		var name = $(".comment_W input[name='name']").val();
-		var pw = $(".comment_W input[name='pw']").val();
-		var content = $(".comment_W input[name='content']").val();
-		var ref = ${vo.idx};
-		
-		$.ajax({
-			url: "b_comment",
-			data :
-			{
-				"name" : name,
-				"ref" : ref,
-				"pw" : pw,
-				"content" : content
-			}
-		}).done(function(data){		
-			var url = data;    
-			$(location).attr('href',url);
-			//$(".comment_V").html(data);
-		});
-		
-		
-	}
-	
-	
 </script>
+<!-- ÏïîÌò∏Ï≤òÎ¶¨ ÌåùÏóÖÏ∞Ω -->
+<div align="center" class="_popup"  id="b_popup" style="width:200px;
+			height:60px; border:2px solid #777;display:none;background-color: white">	 	 
+</div>	
+	<input type="hidden" value="${vo.idx }" id="idx">
 	
-
 	name : <c:out value="${vo.name }" /> ,
 	ip : <c:out value="${vo.ip }" /> , 
 	likes : <c:out value="${vo.hit }" /><br>
@@ -144,12 +28,9 @@
 				${content1 } =>${p }
 	<hr>
 	<div align="right">	
-		<input type="button" value="ºˆ¡§" id ="b_modi" onclick="show_popup('b_modi')">
-		<input type="button" value="ªË¡¶" id ="b_del" onclick="show_popup('b_del')">
-		<input type="button" value=" µπæ∆∞°±‚ " onclick="location.href='board?p=${p}&s=${s}&b=${b}'" />
-		<div align="center" class="_popup"  id="b_popup" style="width:200px;
-			height:60px; border:2px solid #777;display:none;">	 	 
-		</div>
+		<input type="button" value="ÏàòÏ†ï" id ="b_modi" onclick="view_popup('b_modi')">
+		<input type="button" value="ÏÇ≠Ï†ú" id ="b_del" onclick="view_popup('b_del')">
+		<input type="button" value=" ÎèåÏïÑÍ∞ÄÍ∏∞ " onclick="location.href='board?p=${p}&s=${s}&b=${b}'" />
 	</div>
 	
 	
@@ -158,15 +39,16 @@
 	<br>
 	<div class="comment_V">
 		<c:if test="${empty clist }">
-			µÓ∑œµ» ¥Ò±€¿Ã æ¯Ω¿¥œ¥Ÿ.
+			Îì±Î°ùÎêú ÎåìÍ∏ÄÏù¥ ÏóÜÏäµÎãàÎã§.
 		</c:if>
 		<c:if test="${!empty clist }">
 			<c:forEach var="c" items="${clist }" varStatus="s">
-				±€æ¥¿Ã :<c:out value="${c.name }" /> /
-				µÓ∑œ¿œ: <fmt:formatDate value="${c.regdate }"/> 
-				<input type="button" value="ºˆ¡§"  id="${c.idx }" onclick="show_popup('${c.idx}')">
-				<input type="button" value="ªË¡¶"  id="${c.idx }" onclick="show_popup('${c.idx}')"><br>
-				¥Ò±€ :<c:set var ="content" value="${c.content } "/>
+				Í∏ÄÏì¥Ïù¥ :<c:out value="${c.name }" /> /
+				Îì±Î°ùÏùº: <fmt:formatDate value="${c.regdate }"/> 
+				
+				<input type="button" value="Delete"  id="${c.idx }" onclick="view_popup('${c.idx}')">
+				<br>
+				ÎåìÍ∏Ä :<c:set var ="content" value="${c.content } "/>
 				<c:set var="content" value="${fn:replace(content,'<','&lt;') }"/>
 				<c:set var="content" value="${fn:replace(content,newLine,br) }"/>
 				${content }<br>
@@ -175,16 +57,13 @@
 		</c:if>
 	</div>
 
-	<div align="center" class="_popup" id="c_popup" style="width:200px;
-	height:60px; border:2px solid #777;display:none;">	 	 
-	</div>
+	
 	<hr>
 			${idx }
 	<div class="comment_W">
 		name : <input type="text" name="name" size="7">  pw : <input type="text" name="pw" size="7"> <br>
-		¥Ò±€ : <input type="text" name="content" size="20px"><hr>
-		<input type="button" value="¿¸º€" onclick="comments()">
-		<input type="button" value="ªË¡¶" onclick="comments()">
+		ÎåìÍ∏Ä : <input type="text" name="content" size="20px"><hr>
+		<input type="button" value="Ï†ÑÏÜ°" onclick="comments()">
 	
 	</div>
 	
