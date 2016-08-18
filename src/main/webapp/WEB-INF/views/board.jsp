@@ -4,8 +4,8 @@
 <%@ include file="index.jsp" %>
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/mainIn.js"></script>
-<script src="${pageContext.request.contextPath}/resources/board.js"></script>
+<script src="/resources/mainIn.js"></script>
+<script src="/resources/board.js"></script>
 <script>
 </script>
 <article class="pagewidth" >

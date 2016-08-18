@@ -20,7 +20,7 @@
 				</if>
 				<if test="search=='all'">
 					AND (name LIKE '%'||#{searchContent}||'%'
-					OR subject LIKE '%'||#{searchContent}||'%'
+					OR title LIKE '%'||#{searchContent}||'%'
 					OR content LIKE '%'||#{searchContent}||'%')
 				</if>
 			</if>
@@ -89,7 +89,7 @@
 			from
 				(select * from board 
 				<where> 
-		 		 	<if test="categoryid>'0' ">
+		 		 	<if test='categoryid>"0"'>
 		      			categoryid=TO_NUMBER(#{categoryid })
 		 			</if> 
 		 			<if test="search!=null">

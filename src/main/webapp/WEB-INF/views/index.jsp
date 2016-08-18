@@ -12,18 +12,18 @@
  
  
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/mainIn.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/styles.css" />
+<script src="/resources/mainIn.js"></script>
+<link rel="stylesheet" type="text/css" href="/resources/css/login.css" />
+<link rel="stylesheet" type="text/css" href="/resources/css/styles.css" />
 </head>
-
 <body>
-	
-	<div id="joinUs" style="display:none;">
-		
+	<div id="joinUs">
+		<div class="joinform" id="stylized"></div>	
 	</div>
+	<div id="overlay"></div>
+	
 	<div class="main-container">
-
+	
 		<!-- HEADER -->
 		<header class="block">
 		<ul class="header-menu horizontal-list">
@@ -82,7 +82,7 @@
 					<!-- ACCOUNT (RIGHT-CONTAINER) -->
 					<h2 class="titular">SIGN IN TO YOUR ACCOUNT</h2>
 					<p align="center" style="margin-top:0px">
-						<a href="javascript:showPopup();">IF YOU WANT TO JOIN US</a>
+						<a id="join" href="javascript:showPopup();">IF YOU WANT TO JOIN US</a>
 					</p>
 					<div class="input-container">
 						<input type="text" placeholder="E-mail" id="login"
@@ -99,7 +99,7 @@
 						</div>
 					</div>
 					<a class="sign-in button" href="#22">SIGN IN</a>
-					<p class="scnd-font-color">Forgot Password?</p>
+					<p class="scnd-font-color"><a id="forgot" href="javascript:showPopup();">Forgot Password?</a></p>
 
 				</div>
 

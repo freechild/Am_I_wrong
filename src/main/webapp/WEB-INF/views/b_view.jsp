@@ -4,8 +4,8 @@
 
 <article>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/mainIn.js"></script>
-<script src="${pageContext.request.contextPath}/resources/b_view.js" ></script>
+<script src="/resources/mainIn.js"></script>
+<script src="/resources/b_view.js" ></script>
 <script type="text/javascript">
 
 </script>

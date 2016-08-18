@@ -31,14 +31,14 @@ public class BoardService {
 			int categoryCount = categoryDao.getCount();
 			if(categoryid < 0 || categoryid > categoryCount) categoryid=0;
 			
-			System.out.println(categoryid);
+//			System.out.println(categoryid);
 			int totalCount = boardDao.getCount(categoryid);
-			System.out.println(boardDao.getCount(categoryid));
+//			System.out.println(boardDao.getCount(categoryid));
 			board = new PagingList<BoardVO>(totalCount, currentPage, pageSize, blockSize);
 			
 			board.setList(boardDao.selectList(board.getStartNo(), 
 					board.getEndNo(), categoryid));
-			System.out.println(board.getTotalCount());
+//			System.out.println(board.getTotalCount());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
@@ -53,7 +53,7 @@ public class BoardService {
 		try {
 			int categoryCount = categoryDao.getCount();
 			if(categoryid < 0 || categoryid > categoryCount) categoryid =0;
-			int totalCount = boardDao.getCount(categoryid);
+			int totalCount = boardDao.getCount(categoryid, search, searchContent);
 			board = new PagingList<BoardVO>(totalCount, currentPage, pageSize, blockSize);
 			board.setList(boardDao.selectSearch(board.getStartNo(),
 					board.getEndNo(), categoryid, search, searchContent));
@@ -75,7 +75,7 @@ public class BoardService {
 			e.printStackTrace();
 		}		
 		
-		System.out.println("service : "+result);
+//		System.out.println("service : "+result);
 		return result;
 	}
 	
@@ -148,7 +148,7 @@ public class BoardService {
 			result=1;
 		}
 		
-		System.out.println(result);
+//		System.out.println(result);
 	}
 }
 

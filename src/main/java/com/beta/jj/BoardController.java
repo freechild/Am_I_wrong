@@ -139,6 +139,8 @@ public class BoardController {
 			BoardVO vo = boardService.selectByIdx(idx);
 			model.addAttribute("vo", vo);
 			
+			boardService.hitIncrement(idx);
+			
 			HashMap<String, Integer> map =pagingProcess.pagingProcess(request);
 			
 			int currentPage = map.get("currentPage");
@@ -156,7 +158,7 @@ public class BoardController {
 			
 			List<CommentVO> Clist = commentService.selectList(idx);
 			model.addAttribute("clist", Clist);
-			System.out.println(Clist);
+//			System.out.println(Clist);
 			return "b_view";
 		}
 	
@@ -167,7 +169,7 @@ public class BoardController {
 				vo.setSavefile(" ");
 				vo.setOrigfile(" ");
 			}
-			System.out.println(vo);
+//			System.out.println(vo);
 			boardService.insert(vo);
 			
 			return "redirect:/board";
@@ -283,10 +285,25 @@ public class BoardController {
 			
 			
 			
-			model.addAttribute("cid",request.getParameter("value") );
+			HashMap<String, Integer> map =pagingProcess.pagingProcess(request);
 			
-			boardService.selectList(1, 5, 5, categoryid);
 			
+			int currentPage = map.get("currentPage");
+			//p
+			int pageSize = map.get("pageSize");
+			//s
+			int blockSize = map.get("blockSize");
+			//b
+			
+			model.addAttribute("p", currentPage);
+			model.addAttribute("s", pageSize);
+			model.addAttribute("b", blockSize);
+			model.addAttribute("cid", categoryid);
+			
+			PagingList<BoardVO> board =
+			boardService.selectList(currentPage, pageSize, blockSize, categoryid);
+			
+			model.addAttribute("board",board);
 			
 			List<CategoryVO>categories =
 					categoryService.getCategories();
