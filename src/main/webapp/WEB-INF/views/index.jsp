@@ -17,9 +17,8 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/styles.css" />
 </head>
 <body>
-	<div id="joinUs">
-		<div class="joinform" id="stylized"></div>	
-	</div>
+	
+	<div class="joinForm" id="stylized"></div>	
 	<div id="overlay"></div>
 	
 	<div class="main-container">
@@ -82,7 +81,7 @@
 					<!-- ACCOUNT (RIGHT-CONTAINER) -->
 					<h2 class="titular">SIGN IN TO YOUR ACCOUNT</h2>
 					<p align="center" style="margin-top:0px">
-						<a id="join" href="javascript:showPopup();">IF YOU WANT TO JOIN US</a>
+						<a id="join" href="javascript:showPopup('join');">IF YOU WANT TO JOIN US</a>
 					</p>
 					<div class="input-container">
 						<input type="text" placeholder="E-mail" id="login"
@@ -99,7 +98,7 @@
 						</div>
 					</div>
 					<a class="sign-in button" href="#22">SIGN IN</a>
-					<p class="scnd-font-color"><a id="forgot" href="javascript:showPopup();">Forgot Password?</a></p>
+					<p class="scnd-font-color"><a id="forgot" href="javascript:showPopup('forgot');">Forgot Password?</a></p>
 
 				</div>
 

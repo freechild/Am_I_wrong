@@ -11,7 +11,7 @@
 <article class="pagewidth" >
 	<div align="center">
 		<table class="board"  border="1" style="border:none;" >
-	
+
 			<tr>
 				<th colspan="5" style="border: none;">
 					<span style="font-size: 20pt;"> 

@@ -2,7 +2,8 @@
 /*레이어 밖 누르면 감추기*/
 $(document).ready(function(){
 		$(document).mousedown(function(e){
-		$('._popup').each(function(){
+			
+		$('_popup').each(function(){
 		        if ( $(this).css('display') == 'block' )
 		        {
 		            var l_position = $(this).offset();
@@ -21,7 +22,7 @@ $(document).ready(function(){
 		                $(this).hide("fast");
 		            }
 		        }
-		        
+		           
 		    });
 		});
 	})
@@ -32,7 +33,7 @@ var whichBtn;
 
 function view_popup(obj)
 {
-	whichBtn = $('#'+obj).attr("id");
+	whichBtn = $('#'+obj).attr('id');
 	
     $('._popup').show("fast");
     $('._popup').center();	
@@ -63,8 +64,7 @@ function checkPW(event){
 	    		{
 	    			"pw": pw ,
 	    			"idx":idx,
-	    			"whichBtn":whichBtn
-	    			
+	    			"whichBtn":whichBtn	
 	    		}
 	    	}).done(function(data){
 				if (data=="false"){
