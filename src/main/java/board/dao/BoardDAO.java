@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import All.vo.BoardVO;
+import All.vo.TotalVO;
 
 
 @Repository
@@ -53,11 +54,11 @@ public class BoardDAO {
 		session.delete("board.delete",idx);
 	}
 	// 1개얻기
-	public BoardVO selectByIdx(int idx){
+	public TotalVO selectByIdx(int idx){
 		return session.selectOne("board.selectByIdx",idx);
 	}
 	// 리스트 얻기
-	public List<BoardVO> selectList(int startNo,
+	public List<TotalVO> selectList(int startNo,
 			int endNo,int categoryid){
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put("startNo",startNo );
@@ -66,7 +67,7 @@ public class BoardDAO {
 		return session.selectList("board.selectList",map);
 	}
 	// 검색 리스트 얻기
-	public List<BoardVO> selectSearch( int startNo,int endNo,
+	public List<TotalVO> selectSearch( int startNo,int endNo,
 			int categoryid, String search,String searchContent){
 		HashMap<String, String> map = new HashMap<String, String> ();
 		map.put("startNo",startNo+"" );

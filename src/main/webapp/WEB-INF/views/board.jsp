@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<%@ include file ="index.jsp" %>
 <%@ include file="include.jsp" %>
-<%@ include file="index.jsp" %>
-
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-<script src="/resources/mainIn.js"></script>
+<script src="/resources/js/mainIn.js"></script>
 <script src="/resources/board.js"></script>
 <script>
 </script>
@@ -83,7 +81,7 @@
 				<td align="center">
 					<fmt:formatDate value="${v.regdate }"/>
 				</td>
-				<td align="center">${v.hit }</td>
+				<td align="center">${v.read}</td>
 			</tr>
 		</c:forEach>
 	</c:if>
@@ -112,7 +110,7 @@
 	</tr>
 	
 			
-			<tr>
+	 	<tr>
 				<td align="center" colspan="5" style="border: none;">
 					<form action="b_search" method="get">
 						<input type="hidden" name="s" value="${pageSize }"> 

@@ -86,6 +86,13 @@ public class PagingList<T> {
 	public int getEndPage() {
 		return endPage;
 	}
+
+	@Override
+	public String toString() {
+		return "PagingList [list=" + list + ", totalCount=" + totalCount + ", currentPage=" + currentPage
+				+ ", pageSize=" + pageSize + ", blockSize=" + blockSize + ", totalPage=" + totalPage + ", startNo="
+				+ startNo + ", startPage=" + startPage + ", endNo=" + endNo + ", endPage=" + endPage + "]";
+	}
 	
 	
 }

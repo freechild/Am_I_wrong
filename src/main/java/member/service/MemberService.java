@@ -55,4 +55,14 @@ public class MemberService {
 		return result;
 	}
 	
+	public int selectByIdx(String email){
+		int result =0;
+		try {
+			result = memberDAO.selectByone(email).getIdx();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+		return result;
+	}
+	
 }

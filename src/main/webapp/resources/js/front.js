@@ -100,7 +100,7 @@ function Login(){
 	}).done(function(data){
 		if(data=="true"){
 			var url = $('#l_email').val();
-			$(location).attr('href',url);
+			$(location).attr('href',url+"/main");
 		}
 		else
 			loginForm(data);

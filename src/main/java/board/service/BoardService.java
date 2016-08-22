@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import All.vo.BoardVO;
 import All.vo.PagingList;
+import All.vo.TotalVO;
 import board.dao.BoardDAO;
 import board.dao.CategoryDAO;
 import board.dao.CommentDAO;
@@ -25,8 +26,8 @@ public class BoardService {
 
 	
 	// 일반리스트
-	public PagingList<BoardVO> selectList(int currentPage,int pageSize,int blockSize,int categoryid){
-		PagingList<BoardVO> board = null;
+	public PagingList<TotalVO> selectList(int currentPage,int pageSize,int blockSize,int categoryid){
+		PagingList<TotalVO> board = null;
 		try {
 			int categoryCount = categoryDao.getCount();
 			if(categoryid < 0 || categoryid > categoryCount) categoryid=0;
@@ -34,7 +35,7 @@ public class BoardService {
 //			System.out.println(categoryid);
 			int totalCount = boardDao.getCount(categoryid);
 //			System.out.println(boardDao.getCount(categoryid));
-			board = new PagingList<BoardVO>(totalCount, currentPage, pageSize, blockSize);
+			board = new PagingList<TotalVO>(totalCount, currentPage, pageSize, blockSize);
 			
 			board.setList(boardDao.selectList(board.getStartNo(), 
 					board.getEndNo(), categoryid));
@@ -46,15 +47,15 @@ public class BoardService {
 	}
 	
 	// 검색리스트
-	public PagingList<BoardVO> 
+	public PagingList<TotalVO> 
 	selectSearch(int currentPage,int pageSize,int blockSize,
 			     int categoryid,String search,String searchContent){
-		PagingList<BoardVO> board = null;
+		PagingList<TotalVO> board = null;
 		try {
 			int categoryCount = categoryDao.getCount();
 			if(categoryid < 0 || categoryid > categoryCount) categoryid =0;
 			int totalCount = boardDao.getCount(categoryid, search, searchContent);
-			board = new PagingList<BoardVO>(totalCount, currentPage, pageSize, blockSize);
+			board = new PagingList<TotalVO>(totalCount, currentPage, pageSize, blockSize);
 			board.setList(boardDao.selectSearch(board.getStartNo(),
 					board.getEndNo(), categoryid, search, searchContent));
 			
@@ -80,9 +81,8 @@ public class BoardService {
 	}
 	
 	// 1개읽기
-	public BoardVO selectByIdx(int idx){
-		BoardVO vo = null;
-		
+	public TotalVO selectByIdx(int idx){
+		TotalVO vo = null;
 		try {
 			vo=boardDao.selectByIdx(idx);
 		} catch (Exception e) {
@@ -102,35 +102,35 @@ public class BoardService {
 	}
 	
 	
-	public String passwordCheck (int idx,String pw){
-		String flag = "false";
-		
-		try {
-			BoardVO vo =
-			boardDao.selectByIdx(idx);
-			if(vo==null){
-				
-				System.out.println("<passwordCheck> vo not exist");
-			}
-			else if(vo!=null){
-				if(!vo.getPw().equals(pw)){	
-					System.out.println("<passwordCheck> password not match");
-					System.out.println(pw);
-					System.out.println(vo.getPw());
-					
-				}
-				else if(vo.getPw().equals(pw)){
-					flag="true";
-				}
-			}
-				
-		} catch (Exception e) {
-			
-			System.out.println("<passwordCheck> error");
-		}
-		//System.out.println(flag);
-		return flag;
-	}
+//	public String passwordCheck (int idx,String pw){
+//		String flag = "false";
+//		
+//		try {
+//			BoardVO vo =
+//			boardDao.selectByIdx(idx);
+//			if(vo==null){
+//				
+//				System.out.println("<passwordCheck> vo not exist");
+//			}
+//			else if(vo!=null){
+//				if(!vo.getPw().equals(pw)){	
+//					System.out.println("<passwordCheck> password not match");
+//					System.out.println(pw);
+//					System.out.println(vo.getPw());
+//					
+//				}
+//				else if(vo.getPw().equals(pw)){
+//					flag="true";
+//				}
+//			}
+//				
+//		} catch (Exception e) {
+//			
+//			System.out.println("<passwordCheck> error");
+//		}
+//		//System.out.println(flag);
+//		return flag;
+//	}
 	
 	
 	

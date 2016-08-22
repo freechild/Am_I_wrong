@@ -3,6 +3,7 @@ package All.contorller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,9 +21,9 @@ public class CommentController {
 	private PasswordCheckLogic passwordCheckLogic;
 	
 	
-	@RequestMapping(value ="b_comment")
+	@RequestMapping(value ="${email}/b_comment")
 	@ResponseBody
-	public String b_comment(@ModelAttribute CommentVO vo){
+	public String b_comment(@PathVariable("email") String email,@ModelAttribute CommentVO vo){
 		
 		commentService.insert(vo);
 //		System.out.println(vo);
@@ -30,9 +31,9 @@ public class CommentController {
 		return "b_view?idx="+vo.getRef();
 	}
 
-	@RequestMapping(value ="c_checkPW")
+	@RequestMapping(value ="${email}/c_checkPW")
 	@ResponseBody
-	public String c_checkPW(@RequestParam("pw") String pw,@RequestParam("idx") int idx,
+	public String c_checkPW(@PathVariable("email") String email,@RequestParam("pw") String pw,@RequestParam("idx") int idx,
 			@RequestParam("b_idx")int b_idx){
 		System.out.println(b_idx);
 		String bool =

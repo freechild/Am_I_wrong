@@ -4,10 +4,10 @@ import java.util.List;
 
 
 import javax.servlet.http.HttpServletRequest;
-
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,23 +16,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.SessionScope;
 
 import All.vo.BoardVO;
 import All.vo.CategoryVO;
 import All.vo.CommentVO;
 import All.vo.PagingList;
+import All.vo.TotalVO;
 import board.service.BoardService;
 import board.service.CategoryService;
 import board.service.CommentService;
 import board.service.PagingProcess;
 import board.service.PasswordCheckLogic;
+import member.service.MemberService;
 
 
 @Controller
 public class BoardController {
 	
-	
-		
+		@Autowired
+		private MemberService memberService;
 		@Autowired
 		private BoardService boardService;
 		@Autowired
@@ -69,9 +72,15 @@ public class BoardController {
 		@Autowired
 		private PagingProcess pagingProcess; 
 
-		@RequestMapping(value="{email}", produces={"text/html"})
-		public String method7(@PathVariable("email") String email){
+		@RequestMapping(value="{email}/main", produces={"text/html"})
+		public String method7(@PathVariable("email") String email,HttpSession session){
+			System.out.println(session.getAttribute("email"));
+			if(session.getAttribute("email")==null)
+				return "front";
+			int m_idx=memberService.selectByIdx(email);
+			session.setAttribute("m_idx",m_idx );
 			return "main";
+			
 		}
 	
 		@RequestMapping(value = "{email}/board", method = RequestMethod.GET)
@@ -95,13 +104,13 @@ public class BoardController {
 			model.addAttribute("b", blockSize);
 			model.addAttribute("cid", categoryid);
 			
-			PagingList<BoardVO> board =
+			PagingList<TotalVO> board =
 			boardService.selectList(currentPage, pageSize, blockSize, categoryid);
 			List<CategoryVO>categories =
 			categoryService.getCategories();
 			
 			
-			
+			System.out.println(board);
 			
 			model.addAttribute("board", board);
 			model.addAttribute("categories", categories);
@@ -136,13 +145,30 @@ public class BoardController {
 			return "b_write";
 		}
 	
+		@RequestMapping(value = "{email}/b_writeOk")
+		public String b_writeOk(@PathVariable("email") String email,@ModelAttribute BoardVO vo,HttpServletRequest request){
+			vo.setIp(request.getRemoteAddr());
+			vo.setMem_ref(Integer.parseInt(String.valueOf( request.getSession().getAttribute("m_idx"))));
+			if(vo.getSavefile()==null){
+				vo.setSavefile(" ");
+				vo.setOrigfile(" ");
+			}
+			System.out.println(vo);
+			boardService.insert(vo);
+	
+			return "redirect:board";
+		}
+		
+		
+		
 		@RequestMapping(value = "{email}/b_view")
 		public String b_view(@PathVariable("email") String email,Model model,@RequestParam("idx") int idx,HttpServletRequest request){
-			
-			BoardVO vo = boardService.selectByIdx(idx);
+//			System.out.println(idx);
+			TotalVO vo = boardService.selectByIdx(idx);
+			System.out.println(vo);
 			model.addAttribute("vo", vo);
 			
-			boardService.hitIncrement(idx);
+//			boardService.hitIncrement(idx);
 			
 			HashMap<String, Integer> map =pagingProcess.pagingProcess(request);
 			
@@ -159,25 +185,13 @@ public class BoardController {
 			model.addAttribute("b", blockSize);
 			model.addAttribute("cid", categoryid);
 			
-			List<CommentVO> Clist = commentService.selectList(idx);
-			model.addAttribute("clist", Clist);
+//			List<CommentVO> Clist = commentService.selectList(idx);
+//			model.addAttribute("clist", Clist);
 //			System.out.println(Clist);
 			return "b_view";
 		}
 	
-		@RequestMapping(value = "{email}/b_writeOk")
-		public String b_writeOk(@PathVariable("email") String email,@ModelAttribute BoardVO vo,HttpServletRequest request){
-			vo.setIp(request.getRemoteAddr());
-			if(vo.getSavefile()==null){
-				vo.setSavefile(" ");
-				vo.setOrigfile(" ");
-			}
-//			System.out.println(vo);
-			boardService.insert(vo);
-			
-			return "redirect:/board";
-		}
-		
+	
 	
 		@RequestMapping(value = "{email}/b_checkPW")
 		@ResponseBody

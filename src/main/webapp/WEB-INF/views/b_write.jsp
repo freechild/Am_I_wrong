@@ -5,8 +5,8 @@
 <jsp:include page="index.jsp" />
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-<script src="/resources/mainIn.js"></script>
-<script src="/resources/b_write.js"></script>
+<script src="/resources/js/mainIn.js"></script>
+<script src="/resources/js/b_write.js"></script>
 
 <article>
 	<div align="center">

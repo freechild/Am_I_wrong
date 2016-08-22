@@ -17,7 +17,7 @@
 	
 	name : <c:out value="${vo.name }" /> ,
 	ip : <c:out value="${vo.ip }" /> , 
-	likes : <c:out value="${vo.hit }" /><br>
+	likes : <c:out value="${vo.likes }" /><br>
 	title : <c:out value="${vo.title }" /> ,
 	Date : <fmt:formatDate value="${vo.regdate }"/>   ->
 	<hr>
@@ -25,7 +25,7 @@
 	<c:set var ="content1" value="${vo.content } "/>
 				<c:set var="content1" value="${fn:replace(content1,'<','&lt;') }"/>
 				<c:set var="content1" value="${fn:replace(content1,newLine,br) }"/>
-				${content1 } =>${p }
+				${content1 }
 	<hr>
 	<div align="right">	
 		<input type="button" value="수정" id ="b_modi" onclick="view_popup('b_modi')">

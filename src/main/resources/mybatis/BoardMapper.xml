@@ -31,10 +31,10 @@
 	<insert id="insert" parameterType="BoardVO">
 		
 		insert into board
-			(idx,categoryid,name,pw,title,content,ip,savefile,origfile,email)
+			(idx,mem_ref,categoryid,title,content,ip,savefile,origfile)
 		values
-			(board_idx_seq.nextval,#{categoryid},#{name},#{pw},
-			 #{title},#{content},#{ip},#{savefile},#{origfile},#{email})
+			(board_idx_seq.nextval,#{mem_ref},#{categoryid},
+			 #{title},#{content},#{ip},#{savefile},#{origfile})
 	
 	</insert>
 	<!-- 고치기 -->
@@ -57,16 +57,18 @@
 		]]>
 	</update>
 	<!-- 조회수 증가하기 -->
-	<update id="hitIncrement" parameterType="int">
+	<update id="readIncrement" parameterType="int">
 		<![CDATA[
 			update 
 				board
 			set
-				hit=hit+1
+				read+=1
 			where
 				idx=#{idx}
 		]]>
 	</update>
+	
+	
 	<!-- 지우기 -->
 	<delete id="delete" parameterType="int">
 		<![CDATA[
@@ -74,17 +76,16 @@
 		]]>
 	</delete>
 	<!-- 1개 얻기 -->
-	<select id="selectByIdx" parameterType="int" resultType="BoardVO">
-		<![CDATA[
-			select * from board where idx=#{idx}
-		]]>
+	<select id="selectByIdx" parameterType="int" resultType="TotalVO">
+		SELECT b.* ,m.NAME FROM board b, MEMBER m WHERE b.mem_ref = m.idx AND b.idx=#{idx}
 	</select>
+	
 	<!-- 리스트 얻기 -->
-	<select id="selectList" parameterType="java.util.HashMap" resultType="BoardVO">
+	<select id="selectList" parameterType="java.util.HashMap" resultType="TotalVO">
 		select
-			R.*
+			R.* , m.name
 		from
-			(select
+			member m,(select
 				rownum rnum, Q.*
 			from
 				(select * from board 
@@ -108,7 +109,7 @@
 			where
 				rownum<=#{endNo}) R
 		where
-			rnum>=#{startNo}	
+			rnum>=#{startNo} and m.idx = R.mem_ref	
 		]]>
 	</select>
 </mapper>

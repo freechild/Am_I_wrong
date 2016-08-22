@@ -2,21 +2,24 @@
 
  <%@ include file="include.jsp" %>
 
-<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"> -->
+
 
 <!DOCTYPE html>
 <html>
+<head>
 <!-- IE -호환성 문제 해결 -->
  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
  <meta http-equiv="Content-Script-Type" content="text/javascript">
  <meta http-equiv="Content-Style-Type" content="text/css">
  
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
-<script src="/resources/mainIn.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+<script src="/resources/js/mainIn.js"></script>
+<script src="/resources/js/mainMenuBar.js"></script>
 <link rel="stylesheet" type="text/css" href="/resources/css/main.css" />
 </head>
 <body>
-	
+	<input type="text" value="${sessionScope.email }" id="scope">
+	<input type="text" value="${sessionScope.m_idx }" id="scope_idx">
 	<div class="joinForm" id="stylized"></div>	
 	<div id="overlay"></div>
 	
@@ -25,9 +28,9 @@
 		<!-- HEADER -->
 		<header class="block">
 		<ul class="header-menu horizontal-list">
-			<li><a class="header-menu-tab" href="main"><span
+			<li><a class="header-menu-tab" id="main" href="main"><span
 					class="icon entypo-cog scnd-font-color"></span>Home</a></li>
-			<li><a class="header-menu-tab" href="board"><span
+			<li><a class="header-menu-tab" id="board" href="board"><span
 					class="icon fontawesome-user scnd-font-color"></span>Board</a></li>
 			<li><a class="header-menu-tab" href="#3"><span
 					class="icon fontawesome-envelope scnd-font-color"></span>Messages</a> <a

@@ -5,26 +5,26 @@ jQuery.fn.center = function () {
     return this;
 }
 
-function pop_hide(){
-	$('.joinForm').hide();
-	$('#overlay').hide();
-}
-
-
-function showPopup(obj)  {
-	
-	whichBtn = $('#'+obj).attr('id')
-	var i = "<p>환영합니다!</p>";
-	//여기서부터 로그인박스 만듬			
-	$("#overlay").fadeTo(100, .3);
-	$('.joinForm').show();
-	$('.joinForm').center();
-	//alert(whichBtn);
-	message(whichBtn);		
-	
-	
-
-}
+//function pop_hide(){
+//	$('.joinForm').hide();
+//	$('#overlay').hide();
+//}
+//
+//
+//function showPopup(obj)  {
+//	
+//	whichBtn = $('#'+obj).attr('id')
+//	var i = "<p>환영합니다!</p>";
+//	//여기서부터 로그인박스 만듬			
+//	$("#overlay").fadeTo(100, .3);
+//	$('.joinForm').show();
+//	$('.joinForm').center();
+//	//alert(whichBtn);
+//	message(whichBtn);		
+//	
+//	
+//
+//}
 
 //message
 function message(whichBtn){
