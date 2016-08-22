@@ -1,4 +1,4 @@
-package model.service;
+package board.service;
 
 import java.util.HashMap;
 

@@ -21,10 +21,11 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.beta.jj" />
-	<context:component-scan base-package="model.dao" />
-	<context:component-scan base-package="model.service" />
-	
+	<context:component-scan base-package="All.contorller" />
+	<context:component-scan base-package="board.dao" />
+	<context:component-scan base-package="board.service" />
+	<context:component-scan base-package="member.dao" />
+	<context:component-scan base-package="member.service" />
 	
 	
 </beans:beans>

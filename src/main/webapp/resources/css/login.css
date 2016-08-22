@@ -17,10 +17,10 @@
 .joinForm{
 	display:none;
 	margin:10px;
-	width:500px;
+	width:480px;
 	height:300px;
 	padding:14px;
-	z-index: 99999
+	z-index: 99999;
 }
 
 
@@ -28,6 +28,7 @@
 	border:solid 2px #b7ddf2;
 	background:#50597b;
 }
+
 #stylized h1 {
 	display: inline;
 	font-size:16px;
@@ -37,6 +38,9 @@
 	color: #fff;
 	z-index: 99999
 
+}
+#stylized hr{
+	border-bottom-color:#b7ddf2 
 }
 #stylized p{
 	font-size:11px;

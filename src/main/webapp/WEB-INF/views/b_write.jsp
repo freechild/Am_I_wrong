@@ -48,36 +48,6 @@
 						</select>
 					</td>
 				</tr>
-				<tr>
-
-					<th>작성자</th>
-					<td>
-						<c:if test="${!empty modi}">
-							<input type="text" name="name" size="35" maxlength="20" class="boxTF" 
-							value="${vo.name }" readonly="readonly"/>
-						</c:if>
-						<c:if test="${empty modi }">
-							<input type="text" name="name" size="35" maxlength="20" class="boxTF" />
-						</c:if>
-					
-					</td>
-				
-				</tr>
-				<tr>
-
-					<th>E-Mail</th>
-					<td>
-						<c:if test="${!empty modi }">
-							<input type="text" name="email" size="35" maxlength="50"
-							 	value="${vo.email }" class="boxTF" />						
-						</c:if>
-						<c:if test="${empty modi }">
-							<input type="text" name="email" size="35" maxlength="50"
-								class="boxTF" />						
-						</c:if>
-					</td>
-
-				</tr>
 
 				<tr>
 
@@ -93,18 +63,11 @@
 
 				</tr>
 				<tr>
-
-					<th>패스워드</th>
-					<td><input type="password" name="pw" size="35" maxlength="7"
-						class="boxTF" />&nbsp;(게시물 수정 및 삭제시 필요 !!!)</td>
-
-				</tr>
-				<tr>
 					<td><input type="file" name="file" class="btn2" /></td>
 				</tr>
 				<tr>
 
-					<td>
+					<td align="center">
 						<input type="submit" value=" 등록하기 "  /> 
 						<input type="button" value=" 돌아가기 " onclick="history.back()" />
 						<input type="reset" value=" 다시입력 " onclick="document.myForm.subject.focus();" />

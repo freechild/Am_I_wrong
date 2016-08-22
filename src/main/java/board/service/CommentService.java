@@ -1,4 +1,4 @@
-package model.service;
+package board.service;
 
 import java.util.List;
 
@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import model.dao.CommentDAO;
-import model.vo.BoardVO;
-import model.vo.CommentVO;
+import All.vo.BoardVO;
+import All.vo.CommentVO;
+import board.dao.CommentDAO;
 
 @Transactional
 @Service

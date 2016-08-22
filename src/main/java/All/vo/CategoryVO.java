@@ -1,4 +1,4 @@
-package model.vo;
+package All.vo;
 
 public class CategoryVO {
 	private int idx;

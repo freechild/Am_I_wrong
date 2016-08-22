@@ -1,4 +1,4 @@
-package com.beta.jj;
+package All.contorller;
 import java.util.HashMap;
 import java.util.List;
 
@@ -11,20 +11,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import model.service.BoardService;
-import model.service.CategoryService;
-import model.service.CommentService;
-import model.service.PagingProcess;
-import model.service.PasswordCheckLogic;
-import model.vo.BoardVO;
-import model.vo.CategoryVO;
-import model.vo.CommentVO;
-import model.vo.PagingList;
+import All.vo.BoardVO;
+import All.vo.CategoryVO;
+import All.vo.CommentVO;
+import All.vo.PagingList;
+import board.service.BoardService;
+import board.service.CategoryService;
+import board.service.CommentService;
+import board.service.PagingProcess;
+import board.service.PasswordCheckLogic;
 
 
 @Controller
@@ -68,10 +69,13 @@ public class BoardController {
 		@Autowired
 		private PagingProcess pagingProcess; 
 
-		
+		@RequestMapping(value="{email}", produces={"text/html"})
+		public String method7(@PathVariable("email") String email){
+			return "main";
+		}
 	
-		@RequestMapping(value = {"board"}, method = RequestMethod.GET)
-		public String board(Model model,HttpServletRequest request) {
+		@RequestMapping(value = "{email}/board", method = RequestMethod.GET)
+		public String board(@PathVariable("email") String email,Model model,HttpServletRequest request) {
 			
 			
 			HashMap<String, Integer> map =pagingProcess.pagingProcess(request);
@@ -106,11 +110,10 @@ public class BoardController {
 	}
 	
 		
-		@RequestMapping(value ="b_write")
-		public String b_write(HttpServletRequest request,Model model){
+		@RequestMapping(value ="{email}/b_write")
+		public String b_write(@PathVariable("email") String email,HttpServletRequest request,Model model){
 			
 			HashMap<String, Integer> map =pagingProcess.pagingProcess(request);
-			
 			
 			int currentPage = map.get("currentPage");
 			//p
@@ -133,8 +136,8 @@ public class BoardController {
 			return "b_write";
 		}
 	
-		@RequestMapping(value = "b_view")
-		public String b_view(Model model,@RequestParam("idx") int idx,HttpServletRequest request){
+		@RequestMapping(value = "{email}/b_view")
+		public String b_view(@PathVariable("email") String email,Model model,@RequestParam("idx") int idx,HttpServletRequest request){
 			
 			BoardVO vo = boardService.selectByIdx(idx);
 			model.addAttribute("vo", vo);
@@ -162,8 +165,8 @@ public class BoardController {
 			return "b_view";
 		}
 	
-		@RequestMapping(value = "b_writeOk")
-		public String b_writeOk(@ModelAttribute BoardVO vo,HttpServletRequest request){
+		@RequestMapping(value = "{email}/b_writeOk")
+		public String b_writeOk(@PathVariable("email") String email,@ModelAttribute BoardVO vo,HttpServletRequest request){
 			vo.setIp(request.getRemoteAddr());
 			if(vo.getSavefile()==null){
 				vo.setSavefile(" ");
@@ -176,9 +179,9 @@ public class BoardController {
 		}
 		
 	
-		@RequestMapping(value = "b_checkPW")
+		@RequestMapping(value = "{email}/b_checkPW")
 		@ResponseBody
-		public String b_checkPW(Model model,@RequestParam("idx") int idx,@RequestParam("pw")String pw,@RequestParam("whichBtn")String whichBtn){
+		public String b_checkPW(@PathVariable("email") String email,Model model,@RequestParam("idx") int idx,@RequestParam("pw")String pw,@RequestParam("whichBtn")String whichBtn){
 					
 //			System.out.println(idx);
 //			System.out.println(pw);
@@ -205,8 +208,8 @@ public class BoardController {
 		}
 		
 		
-		@RequestMapping(value ="b_modi")
-		public String b_modi(Model model,@RequestParam int idx,@RequestParam int modi,HttpServletRequest request){
+		@RequestMapping(value ="{email}/b_modi")
+		public String b_modi(@PathVariable("email") String email,Model model,@RequestParam int idx,@RequestParam int modi,HttpServletRequest request){
 			
 			BoardVO vo =boardService.selectByIdx(idx);
 			//System.out.println(vo);
@@ -220,8 +223,8 @@ public class BoardController {
 			return "b_write";
 		}
 		
-		@RequestMapping(value ="b_modiView")
-		public String b_modiView(Model model,@RequestParam int idx,@RequestParam int modi,
+		@RequestMapping(value ="{email}/b_modiView")
+		public String b_modiView(@PathVariable("email") String email,Model model,@RequestParam int idx,@RequestParam int modi,
 				@ModelAttribute BoardVO vo,HttpServletRequest request){
 			
 			vo.setIp(request.getRemoteAddr());
@@ -237,8 +240,8 @@ public class BoardController {
 		}
 		
 		
-		@RequestMapping(value ="b_search")
-		public String b_search(Model model,HttpServletRequest request){
+		@RequestMapping(value ="{email}/b_search")
+		public String b_search(@PathVariable("email") String email,Model model,HttpServletRequest request){
 			
 			HashMap<String, Integer> map =pagingProcess.pagingProcess(request);
 			
@@ -280,8 +283,8 @@ public class BoardController {
 			return "board";
 		}
 		
-		@RequestMapping(value ="b_category")
-		public String b_category(Model model,HttpServletRequest request,@RequestParam("value") int categoryid){
+		@RequestMapping(value ="{email}/b_category")
+		public String b_category(@PathVariable("email") String email,Model model,HttpServletRequest request,@RequestParam("value") int categoryid){
 			
 			
 			

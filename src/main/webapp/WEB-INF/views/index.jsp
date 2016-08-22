@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+ <%@ include file="include.jsp" %>
 
 <!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"> -->
 
@@ -10,11 +11,9 @@
  <meta http-equiv="Content-Script-Type" content="text/javascript">
  <meta http-equiv="Content-Style-Type" content="text/css">
  
- 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
 <script src="/resources/mainIn.js"></script>
-<link rel="stylesheet" type="text/css" href="/resources/css/login.css" />
-<link rel="stylesheet" type="text/css" href="/resources/css/styles.css" />
+<link rel="stylesheet" type="text/css" href="/resources/css/main.css" />
 </head>
 <body>
 	
@@ -77,30 +76,7 @@
 			<div class="right-container container">
 				<!-- 전체 움직이는 로그인부분 테이블 감싸야함 -->
 				
-				<div class="account block">
-					<!-- ACCOUNT (RIGHT-CONTAINER) -->
-					<h2 class="titular">SIGN IN TO YOUR ACCOUNT</h2>
-					<p align="center" style="margin-top:0px">
-						<a id="join" href="javascript:showPopup('join');">IF YOU WANT TO JOIN US</a>
-					</p>
-					<div class="input-container">
-						<input type="text" placeholder="E-mail" id="login"
-							class="email text-input">
-						<div class="input-icon envelope-icon-acount">
-							<span class="fontawesome-envelope scnd-font-color"></span>
-						</div>
-					</div>
-					<div class="input-container">
-						<input type="text" placeholder="Password" id="login"
-						class="password text-input">
-						<div class="input-icon password-icon">
-							<span class="fontawesome-lock scnd-font-color"></span>
-						</div>
-					</div>
-					<a class="sign-in button" href="#22">SIGN IN</a>
-					<p class="scnd-font-color"><a id="forgot" href="javascript:showPopup('forgot');">Forgot Password?</a></p>
-
-				</div>
+				
 
 
 				<div class="calendar-month block">

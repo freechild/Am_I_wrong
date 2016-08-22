@@ -1,14 +1,14 @@
-package model.service;
+package board.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import model.dao.BoardDAO;
-import model.dao.CategoryDAO;
-import model.dao.CommentDAO;
-import model.vo.BoardVO;
-import model.vo.PagingList;
+import All.vo.BoardVO;
+import All.vo.PagingList;
+import board.dao.BoardDAO;
+import board.dao.CategoryDAO;
+import board.dao.CommentDAO;
 
 @Service
 @Transactional
