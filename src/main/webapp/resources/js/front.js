@@ -25,7 +25,7 @@ function showPopup(obj){
 	if(obj == 'f_btn')
 		loginForm("Welcome Passenger");
 	else 
-		$('.joinForm').html("<h1>Login</h1>");
+		board_modi();
 }
 
 function loginForm(i){

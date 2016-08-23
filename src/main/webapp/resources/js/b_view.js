@@ -103,6 +103,19 @@ function checkPW(event){
     	}
     }
 }
+
+
+function board_modi(){
+	$('.joinForm').html("<h1>Modify</h1>");
+	$('.joinForm').append("<span id='img_tag'><a href='javascript:pop_hide()'><img src='/resources/Image/ic_clear.png'></a></span>");
+	// modify from who writing something
+	$.ajx({
+	
+	})
+	
+}
+
+
 function comments(){
 	
 	$.ajax({
