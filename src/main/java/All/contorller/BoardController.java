@@ -34,8 +34,7 @@ import member.service.MemberService;
 @Controller
 public class BoardController {
 	
-		@Autowired
-		private MemberService memberService;
+		
 		@Autowired
 		private BoardService boardService;
 		@Autowired
@@ -72,16 +71,6 @@ public class BoardController {
 		@Autowired
 		private PagingProcess pagingProcess; 
 
-		@RequestMapping(value="{email}/main", produces={"text/html"})
-		public String method7(@PathVariable("email") String email,HttpSession session){
-			System.out.println(session.getAttribute("email"));
-			if(session.getAttribute("email")==null)
-				return "front";
-			int m_idx=memberService.selectByIdx(email);
-			session.setAttribute("m_idx",m_idx );
-			return "main";
-			
-		}
 	
 		@RequestMapping(value = "{email}/board", method = RequestMethod.GET)
 		public String board(@PathVariable("email") String email,Model model,HttpServletRequest request) {

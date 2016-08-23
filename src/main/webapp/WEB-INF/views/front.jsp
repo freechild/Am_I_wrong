@@ -20,7 +20,7 @@
 	<div class="joinForm" id="stylized"></div>	
 	<div id="overlay"></div>
 	<section class="front">
-		<a href="javascript:showPopup()" id="button"><img src='/resources/Image/ic_power_settings.png'></a>
+		<a href="javascript:showPopup('f_btn')" id="f_btn"><img src='/resources/Image/ic_power_settings.png'></a>
 		<span></span>
 	</section>
 </body>

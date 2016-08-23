@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="include.jsp" %>
-<jsp:include page="index.jsp" />
+<%@ include file="index.jsp" %>
+
 
 <article>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-<script src="/resources/js/mainIn.js"></script>
 <script src="/resources/js/b_view.js" ></script>
+<script src="/resources/js/front.js" ></script>
 <script type="text/javascript">
 
 </script>
@@ -28,8 +28,8 @@
 				${content1 }
 	<hr>
 	<div align="right">	
-		<input type="button" value="수정" id ="b_modi" onclick="view_popup('b_modi')">
-		<input type="button" value="삭제" id ="b_del" onclick="view_popup('b_del')">
+		<input type="button" value="수정" id ="b_modi" onclick="showPopup('b_modi')">
+		<input type="button" value="삭제" id ="b_del" onclick="showPopup('b_del')">
 		<input type="button" value=" 돌아가기 " onclick="location.href='board?p=${p}&s=${s}&b=${b}'" />
 	</div>
 	

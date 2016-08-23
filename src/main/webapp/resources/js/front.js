@@ -17,12 +17,15 @@ function pop_hide(){
 	$('#overlay').hide();
 }
 
-function showPopup(){
+function showPopup(obj){
 	$("#overlay").show("slow");
 	$("#overlay").fadeTo(100, .3);
 	$('.joinForm').show();
 	$('.joinForm').center();
-	loginForm("Welcome Passenger");
+	if(obj == 'f_btn')
+		loginForm("Welcome Passenger");
+	else 
+		$('.joinForm').html("<h1>Login</h1>");
 }
 
 function loginForm(i){

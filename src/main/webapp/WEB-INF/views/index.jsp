@@ -9,18 +9,20 @@
  <meta http-equiv="Content-Style-Type" content="text/css">
  
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-<script src="/resources/js/mainIn.js"></script>
-<script src="/resources/js/mainMenuBar.js"></script>
 <link rel="stylesheet" type="text/css" href="/resources/css/main.css" />
+<link rel="stylesheet" type="text/css" href="/resources/css/login.css" />
+<script src="/resources/js/mainIn.js"></script>
+<script src="/resources/js/front.js"></script>
+
 </head>
 <body>
 	<input type="text" value="${sessionScope.email }" id="scope">
 	<input type="text" value="${sessionScope.m_idx }" id="scope_idx">
+	
 	<div class="joinForm" id="stylized"></div>	
 	<div id="overlay"></div>
 	
 	<div class="main-container">
-	
 		<!-- HEADER -->
 		<header class="block">
 		<ul class="header-menu horizontal-list">

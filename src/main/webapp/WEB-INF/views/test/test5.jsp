@@ -1,71 +1,101 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page import="java.util.Calendar"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true"%>
+<%
+    request.setCharacterEncoding("UTF-8");
+     
+    //클라이언트에서 넘어온 정보 받기
+    String y=request.getParameter("year");
+    String m=request.getParameter("month");
+     
+    //현재 컴퓨터 시스템의 날짜 구하기
+    Calendar cal = Calendar.getInstance();
+    int year = cal.get(Calendar.YEAR);
+    int month = cal.get(Calendar.MONTH)+1; //클라이언트에서 넘겨준 값이 없을때 표시하는 값
+     
+    if(y!=null)
+    year = Integer.parseInt(y);
+    if(m!=null)
+    month = Integer.parseInt(m);
+     
+    cal.set(year, month-1, 1);
+    year = cal.get(Calendar.YEAR);
+    month = cal.get(Calendar.MONTH)+1;
+     
+    // 1일은 무슨 요일?
+    int w = cal.get(Calendar.DAY_OF_WEEK);
+     
+    // 달의 마지막 날짜는?
+    int endDays = cal.getActualMaximum(Calendar.DATE);
+%>
+ 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Check Buttons</title>
-<style>
-
-/*location & align*/
-.loginBtn {
-  margin: 80px auto;
-  width: 460px;
-  text-align: center;
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+ 
+<style type="text/css">
+*{
+    margin:0px; padding:0px;
+    font-family: 돋움; font-size: 9pt;
 }
-/* ��ư����*/
-.loginBtn > .button {
-  margin: 0 12px;
-}
-
-.loginBtn .button {
-  display: inline-block;
-  vertical-align: top;
-  height: 48px;
-  line-height: 46px;
-  padding: 0 25px;
-  font-family: inherit;
-  font-size: 15px;
-  color: #bbb;
-  text-align: center;
-  text-decoration: none;
-  text-shadow: 0 0 2px rgba(0, 0, 0, 0.7);
-  background-color: #303030;
-  background-clip: padding-box;
-  border: 1px solid;
-  border-color: #202020 #1a1a1a #111;
-  border-radius: 25px;
-  background-image: -webkit-linear-gradient(top, #3d3d3d, #272727);
-  background-image: -moz-linear-gradient(top, #3d3d3d, #272727);
-  background-image: -o-linear-gradient(top, #3d3d3d, #272727);
-  background-image: linear-gradient(to bottom, #3d3d3d, #272727);
-  -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.09), 0 1px 3px rgba(0, 0, 0, 0.3);
-  box-shadow: inset 0 1px rgba(255, 255, 255, 0.09), 0 1px 3px rgba(0, 0, 0, 0.3);
-}
-
-.loginBtn .button:active, .button.active {
-  line-height: 48px;
-  color: #ccc;
-  background-color: #b42f32;
-  border-color: #1c1c1c #202020 #222;
-  background-image: -webkit-linear-gradient(top, #a3161a, #b63335 60%, #bf4749);
-  background-image: -moz-linear-gradient(top, #a3161a, #b63335 60%, #bf4749);
-  background-image: -o-linear-gradient(top, #a3161a, #b63335 60%, #bf4749);
-  background-image: linear-gradient(to bottom, #a3161a, #b63335 60%, #bf4749);
-  -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.09);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.09);
-}
-
 </style>
-  <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
 <body>
-  <div class="loginBtn">
-    <a href="#" class="button">id ã��</a>
-    
-    <a href="#" class="button button-check">OK</a>
-  </div>
-
-
+ 
+<br/>
+<br/>
+<center>
+    <table width="210" cellpadding="0" cellspacing="1" bgcolor="#cccccc">
+        <caption style="height: 25px">
+        <a href="calendar.jsp?year=<%=year%>&month=<%=month-1%>">◀</a>
+        <%=year%>年<%=month%>月
+        <a href="calendar.jsp?year=<%=year%>&month=<%=month+1%>">▶</a>
+        </caption>
+        <tr height="25" bgcolor="#e4e4e4">
+            <td width="30" align="center">일</td>
+            <td width="30" align="center">월</td>
+            <td width="30" align="center">화</td>
+            <td width="30" align="center">수</td>
+            <td width="30" align="center">목</td>
+            <td width="30" align="center">금</td>
+            <td width="30" align="center">토</td>
+        </tr>
+        
+        <%
+            int line = 0;
+            //앞의 공백처리
+            out.print("<tr bgcolor='#ffffff' height='25'>");
+            for(int i=1; i<w; i++) {
+                out.print("<td> </td>");
+                line+=1;
+            }
+             
+            //1~마지막날까지 출력하기
+            for(int i=1; i<=endDays; i++) {
+                
+                out.print("<td align='center'>");
+                out.print(i);
+                out.print("</td>");
+                line+=1;
+                if(line==7 && i!=endDays) {
+                    out.print("</tr><tr height='25' bgcolor='#ffffff'>");
+                    line = 0;
+                }
+            }
+             
+            //뒷부분 공백 처리
+            /* 
+            while(line>0 && line<7) {
+                out.print("<td> </td>");
+                line++;
+            }
+            out.print("</tr>");
+             */
+      %>
+    </table>
+</center>
 </body>
 </html>

@@ -2,8 +2,7 @@ package All.contorller;
 
 import java.util.Locale;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
+
 
 import All.vo.MemberVO;
 import member.service.MemberService;
@@ -27,11 +26,6 @@ public class MemberController {
 	private MemberService memberService;
 	
 	
-	@RequestMapping(value = {"/","main"}, method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		
-		return "front";
-	}
 	@RequestMapping(value = "add_person")
 	@ResponseBody
 	public String add_person(@ModelAttribute MemberVO vo){
