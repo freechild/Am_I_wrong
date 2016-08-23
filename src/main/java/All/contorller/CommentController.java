@@ -1,7 +1,10 @@
 package All.contorller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,14 +24,15 @@ public class CommentController {
 	private PasswordCheckLogic passwordCheckLogic;
 	
 	
-	@RequestMapping(value ="${email}/b_comment")
+	@RequestMapping(value ="/b_comment")
 	@ResponseBody
-	public String b_comment(@PathVariable("email") String email,@ModelAttribute CommentVO vo){
+	public String b_comment( String email,@ModelAttribute CommentVO vo,HttpServletRequest request){
+		
+		System.out.println(vo);
 		
 		commentService.insert(vo);
-//		System.out.println(vo);
 			
-		return "b_view?idx="+vo.getRef();
+		return "b_view?idx="+vo.getB_ref();
 	}
 
 	@RequestMapping(value ="${email}/c_checkPW")

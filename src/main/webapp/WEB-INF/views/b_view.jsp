@@ -4,8 +4,8 @@
 
 <article>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-<script src="/resources/mainIn.js"></script>
-<script src="/resources/b_view.js" ></script>
+<script src="/resources/js/mainIn.js"></script>
+<script src="/resources/js/b_view.js" ></script>
 <script type="text/javascript">
 
 </script>
@@ -59,11 +59,9 @@
 
 	
 	<hr>
-			${idx }
 	<div class="comment_W">
-		name : <input type="text" name="name" size="7">  pw : <input type="text" name="pw" size="7"> <br>
 		댓글 : <input type="text" name="content" size="20px"><hr>
-		<input type="button" value="전송" onclick="comments()">
+		<input type="button" value="전송" onclick="javascript:comments()">
 	
 	</div>
 	

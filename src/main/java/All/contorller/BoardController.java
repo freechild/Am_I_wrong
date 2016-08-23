@@ -185,9 +185,9 @@ public class BoardController {
 			model.addAttribute("b", blockSize);
 			model.addAttribute("cid", categoryid);
 			
-//			List<CommentVO> Clist = commentService.selectList(idx);
-//			model.addAttribute("clist", Clist);
-//			System.out.println(Clist);
+			List<TotalVO> Clist = commentService.selectList(idx);
+			model.addAttribute("clist", Clist);
+			System.out.println(Clist);
 			return "b_view";
 		}
 	

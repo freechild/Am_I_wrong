@@ -104,23 +104,18 @@ function checkPW(event){
     }
 }
 function comments(){
-	var name = $(".comment_W input[name='name']").val();
-	var pw = $(".comment_W input[name='pw']").val();
-	var content = $(".comment_W input[name='content']").val();
-	var ref = $("#idx").val();
+	
 	$.ajax({
-		url: "b_comment",
+		url: "/b_comment",
 		data :
 		{
-			"name" : name,
-			"ref" : ref,
-			"pw" : pw,
-			"content" : content
+			"b_ref" : 	$("#idx").val(),
+			"mem_ref" : $("#scope_idx").val(),
+			"content" : $(".comment_W input[name='content']").val()
 		}
 	}).done(function(data){		
 		var url = data;    
 		$(location).attr('href',url);
-		//$(".comment_V").html(data);
 	});
 	
 	

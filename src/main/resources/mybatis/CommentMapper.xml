@@ -9,10 +9,8 @@
 	</select>
  
  	<insert id="insert" parameterType="CommentVO">
- 		insert into comments
- 			(idx,ref,name,pw,content)
- 		values
- 			(comment_idx_seq.nextval,#{ref},#{name},#{pw},#{content})
+ 		INSERT INTO comments(idx,mem_ref,b_ref,content)
+ 		values(comment_idx_seq.nextval,#{mem_ref},#{b_ref},#{content})
  	</insert>
  	
  	
@@ -24,8 +22,9 @@
  		select * from comments where idx=#{idx}
  	</select>
 
- 	<select id="selectList" parameterType="int" resultType="CommentVO">
- 		select * from comments where ref=#{ref} ORDER BY regdate DESC
+ 	<select id="selectList" parameterType="int" resultType="TotalVO">
+ 		SELECT m.NAME, c.IDX,c.CONTENT,c.REGDATE FROM comments c,MEMBER	m 
+		WHERE m.IDX = c.MEM_REF AND c.b_REF =#{b_ref} order by regdate desc
  	</select>
  	
  	

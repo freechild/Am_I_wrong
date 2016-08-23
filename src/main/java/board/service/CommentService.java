@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import All.vo.BoardVO;
 import All.vo.CommentVO;
+import All.vo.TotalVO;
 import board.dao.CommentDAO;
 
 @Transactional
@@ -54,8 +55,8 @@ public class CommentService {
 		return vo;
 	}
 	
-	public List<CommentVO> selectList(int ref){
-		List<CommentVO> list = null;
+	public List<TotalVO> selectList(int ref){
+		List<TotalVO> list = null;
 		try {
 			list = commentDAO.selectList(ref);
 		} catch (Exception e) {
@@ -77,33 +78,33 @@ public class CommentService {
 	public void delete(int idx){
 		commentDAO.delete(idx);	
 	}
-	
-	public String passwordCheck (int idx,String pw){
-		String flag = "false";
-		
-		try {
-			CommentVO vo = commentDAO.selectByIdx(idx);
-			if(vo==null){
-				
-				System.out.println("<passwordCheck> vo not exist");
-			}
-			else if(vo!=null){
-				if(!vo.getPw().equals(pw)){	
-					System.out.println("<passwordCheck> password not match");
-					System.out.println(pw);
-					System.out.println(vo.getPw());
-					
-				}
-				else if(vo.getPw().equals(pw)){
-					flag="true";
-				}
-			}
-				
-		} catch (Exception e) {
-			
-			System.out.println("<passwordCheck> error");
-		}
-		//System.out.println(flag);
-		return flag;
-	}
+//	
+//	public String passwordCheck (int idx,String pw){
+//		String flag = "false";
+//		
+//		try {
+//			CommentVO vo = commentDAO.selectByIdx(idx);
+//			if(vo==null){
+//				
+//				System.out.println("<passwordCheck> vo not exist");
+//			}
+//			else if(vo!=null){
+//				if(!vo.getPw().equals(pw)){	
+//					System.out.println("<passwordCheck> password not match");
+//					System.out.println(pw);
+//					System.out.println(vo.getPw());
+//					
+//				}
+//				else if(vo.getPw().equals(pw)){
+//					flag="true";
+//				}
+//			}
+//				
+//		} catch (Exception e) {
+//			
+//			System.out.println("<passwordCheck> error");
+//		}
+//		//System.out.println(flag);
+//		return flag;
+//	}
 }

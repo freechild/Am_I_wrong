@@ -8,6 +8,7 @@ public class CommentVO {
 	private int b_ref;
 	private String content;
 	private Date regdate;
+	
 	public int getIdx() {
 		return idx;
 	}

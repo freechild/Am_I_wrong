@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import All.vo.CommentVO;
+import All.vo.TotalVO;
 
 @Repository
 public class CommentDAO {
@@ -39,7 +40,7 @@ public class CommentDAO {
 		return session.selectOne("comment.selectByIdx",idx);
 	}
 	// 리스트 가져오기
-	public List<CommentVO> selectList(int ref){
+	public List<TotalVO> selectList(int ref){
 		return session.selectList("comment.selectList",ref);
 	}
 	
