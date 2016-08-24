@@ -18,7 +18,6 @@
 <body>
 	<input type="text" value="${sessionScope.email }" id="scope">
 	<input type="text" value="${sessionScope.m_idx }" id="scope_idx">
-	
 	<div class="joinForm" id="stylized"></div>	
 	<div id="overlay"></div>
 	
@@ -44,7 +43,7 @@
 			<div class="profile-picture small-profile-picture"></div>
 		</div>
 		</header>
-
+		
 		<!-- 왼쪽 메뉴박스-->
 		<div class="left-container container">
 			<div class="menu-box block">

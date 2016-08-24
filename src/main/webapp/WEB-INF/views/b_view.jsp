@@ -6,9 +6,6 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 <script src="/resources/js/b_view.js" ></script>
 <script src="/resources/js/front.js" ></script>
-<script type="text/javascript">
-
-</script>
 <!-- 암호처리 팝업창 -->
 <div align="center" class="_popup"  id="b_popup" style="width:200px;
 			height:60px; border:2px solid #777;display:none;background-color: white">	 	 
@@ -32,7 +29,6 @@
 		<input type="button" value="삭제" id ="b_del" onclick="showPopup('b_del')">
 		<input type="button" value=" 돌아가기 " onclick="location.href='board?p=${p}&s=${s}&b=${b}'" />
 	</div>
-	
 	
 	
 	<hr>

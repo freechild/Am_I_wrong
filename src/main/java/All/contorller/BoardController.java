@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.SessionScope;
 
+import com.google.gson.Gson;
+
 import All.vo.BoardVO;
 import All.vo.CategoryVO;
 import All.vo.CommentVO;
@@ -99,7 +101,7 @@ public class BoardController {
 			categoryService.getCategories();
 			
 			
-			System.out.println(board);
+			//System.out.println(board);
 			
 			model.addAttribute("board", board);
 			model.addAttribute("categories", categories);
@@ -176,58 +178,33 @@ public class BoardController {
 			
 			List<TotalVO> Clist = commentService.selectList(idx);
 			model.addAttribute("clist", Clist);
-			System.out.println(Clist);
+//			System.out.println(Clist);
 			return "b_view";
 		}
-	
-	
-	
-		@RequestMapping(value = "{email}/b_checkPW")
+		
+		@RequestMapping(value ="{email}/b_modi",produces ="text/html; charset=UTF-8")
 		@ResponseBody
-		public String b_checkPW(@PathVariable("email") String email,Model model,@RequestParam("idx") int idx,@RequestParam("pw")String pw,@RequestParam("whichBtn")String whichBtn){
-					
-//			System.out.println(idx);
-//			System.out.println(pw);
-//			System.out.println(whichButton);
+		public String b_modi(@PathVariable("email") String email,Model model,@RequestParam("idx")int idx,@RequestParam("mem_ref")int mem_ref){
+	
+			String flag = passwordCheckLogic.editCheck(idx, mem_ref);
 			
-			String bool = 
-			passwordCheckLogic.passwordCheck(idx, pw);
-			
-			if(bool=="true"){
-				System.out.println("get in the source");
-				if(whichBtn.equals("b_del")){
-					System.out.println("pw is right! delete this");	
-					boardService.delete(idx);
-					bool = "board";
-				}
-				if(whichBtn.equals("b_modi")){
-					System.out.println("pw is right! modity this");	
-					bool = "b_modi?modi=1&idx="+idx;
-				}
+			if(flag == "true"){
+				TotalVO vo = boardService.selectByIdx(idx);
+				System.out.println(vo);
+				flag = "{test':'"+ vo.getContent() +"'}";
+				Gson gson = new Gson();
+				HashMap<String, String> map = new HashMap<String, String>();
+				map.put("title", vo.getTitle());
+				map.put("content", vo.getContent());
+				flag = gson.toJson(map);
 				
 			}
 			
-			return bool;
-		}
-		
-		
-		@RequestMapping(value ="{email}/b_modi")
-		public String b_modi(@PathVariable("email") String email,Model model,@RequestParam int idx,@RequestParam int modi,HttpServletRequest request){
-			
-			BoardVO vo =boardService.selectByIdx(idx);
-			//System.out.println(vo);
-			//System.out.println(modi);
-			
-			b_write(request, model);
-			
-			model.addAttribute("vo",vo);
-			model.addAttribute("modi", modi);
-			
-			return "b_write";
+			return flag;
 		}
 		
 		@RequestMapping(value ="{email}/b_modiView")
-		public String b_modiView(@PathVariable("email") String email,Model model,@RequestParam int idx,@RequestParam int modi,
+		public void b_modiView(@PathVariable("email") String email,Model model,
 				@ModelAttribute BoardVO vo,HttpServletRequest request){
 			
 			vo.setIp(request.getRemoteAddr());
@@ -235,11 +212,9 @@ public class BoardController {
 				vo.setSavefile(" ");
 				vo.setOrigfile(" ");
 			}
-			//System.out.println(vo);
-			boardService.update(vo);
-			b_view(model, idx, request);
-					
-			return "b_view";
+			
+			System.out.println(vo);
+			boardService.update(vo);			
 		}
 		
 		

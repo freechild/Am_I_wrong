@@ -15,14 +15,20 @@
 			</if>
 		 
 			<if test="search!=null">
-				<if test="search!='all'">
-					AND ${search} LIKE '%'||#{searchContent}||'%'
-				</if>
-				<if test="search=='all'">
-					AND (name LIKE '%'||#{searchContent}||'%'
-					OR title LIKE '%'||#{searchContent}||'%'
-					OR content LIKE '%'||#{searchContent}||'%')
-				</if>
+					<if test="search=='name'">
+						m.name LIKE '%'||#{searchContent}||'%'
+					</if>
+					<if test="search=='title'">
+						R.title LIKE '%'||#{searchContent}||'%'
+					</if>
+					<if test="search=='content'">
+						R.content LIKE '%'||#{searchContent}||'%'
+					</if>
+					<if test="search=='all'">
+						AND (m.name LIKE '%'||#{searchContent}||'%'
+						OR R.title LIKE '%'||#{searchContent}||'%'
+						OR R.content LIKE '%'||#{searchContent}||'%')
+					</if>
 			</if>
 		</where>
 		
@@ -43,14 +49,11 @@
 			update 
 				board 
 			set
-				categoryid =#{categoryid},
-				pw =#{pw},
 				title=#{title},
 				content=#{content},
 				ip=#{ip},
 				savefile=#{savefile},
 				origfile=#{origfile},
-				email = ${email},
 				regdate=SYSDATE
 			where 
 				idx=#{idx}
@@ -87,21 +90,27 @@
 		from
 			member m,(select
 				rownum rnum, Q.*
-			from
+				from
 				(select * from board 
 				<where> 
 		 		 	<if test='categoryid>"0"'>
 		      			categoryid=TO_NUMBER(#{categoryid })
 		 			</if> 
 		 			<if test="search!=null">
-						<if test="search!='all'">
-							AND ${search} LIKE '%'||#{searchContent}||'%'
-						</if>
-						<if test="search=='all'">
-							AND (name LIKE '%'||#{searchContent}||'%'
-							OR title LIKE '%'||#{searchContent}||'%'
-							OR content LIKE '%'||#{searchContent}||'%')
-						</if>
+							<if test="search=='name'">
+								m.name LIKE '%'||#{searchContent}||'%'
+							</if>
+							<if test="search=='title'">
+								R.title LIKE '%'||#{searchContent}||'%'
+							</if>
+							<if test="search=='content'">
+								R.content LIKE '%'||#{searchContent}||'%'
+							</if>
+							<if test="search=='all'">
+								AND (m.name LIKE '%'||#{searchContent}||'%'
+								OR R.title LIKE '%'||#{searchContent}||'%'
+								OR R.content LIKE '%'||#{searchContent}||'%')
+							</if>
 					</if>
 				</where>
 		<![CDATA[

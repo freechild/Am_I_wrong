@@ -24,8 +24,10 @@ function showPopup(obj){
 	$('.joinForm').center();
 	if(obj == 'f_btn')
 		loginForm("Welcome Passenger");
-	else 
+	else if(obj =='b_modi') 
 		board_modi();
+	else if(obj =='b_del') 
+		board_del();
 }
 
 function loginForm(i){

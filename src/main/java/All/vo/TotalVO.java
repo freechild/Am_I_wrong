@@ -5,6 +5,7 @@ import java.util.Date;
 public class TotalVO {
 	private String name;
 	private int idx;
+	private int mem_ref;
 	private String categoryid;
 	private String title;
 	private String content;
@@ -66,12 +67,19 @@ public class TotalVO {
 	public void setRead(int read) {
 		this.read = read;
 	}
+	public int getMem_ref() {
+		return mem_ref;
+	}
+	public void setMem_ref(int mem_ref) {
+		this.mem_ref = mem_ref;
+	}
 	@Override
 	public String toString() {
-		return "TotalVO [name=" + name + ", idx=" + idx + ", categoryid=" + categoryid + ", title=" + title
-				+ ", content=" + content + ", ip=" + ip + ", regdate=" + regdate + ", likes=" + likes + ", read=" + read
-				+ "]";
+		return "TotalVO [name=" + name + ", idx=" + idx + ", mem_ref=" + mem_ref + ", categoryid=" + categoryid
+				+ ", title=" + title + ", content=" + content + ", ip=" + ip + ", regdate=" + regdate + ", likes="
+				+ likes + ", read=" + read + "]";
 	}
+	
 	
 	
 	

@@ -145,6 +145,7 @@ public class BoardService {
 			boardDao.update(vo);
 			
 		} catch (Exception e) {
+			e.printStackTrace();
 			result=1;
 		}
 		
