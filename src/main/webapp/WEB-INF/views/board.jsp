@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file ="index.jsp" %>
+<%@ include file ="include.jsp" %>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 <script src="/resources/js/mainIn.js"></script>
-<script src="/resources/board.js"></script>
+<script src="/resources/js/board.js"></script>
 <script>
 </script>
 <article class="pagewidth" >
@@ -127,8 +128,8 @@
 				</td>
 			</tr>
 			<tr>
-				<td align="right" colspan="5" style="border: none;"><c:if
-						test="${!empty search }">
+				<td align="right" colspan="5" style="border: none;">
+				<c:if test="${!empty search }">
 						<input type="button" value="전체보기"
 							onclick="location.href='index.jsp?p=1&s=${board.pageSize }&b=${board.blockSize}&cid=${cid}'">
 					</c:if> <input type="button" value="글쓰기"

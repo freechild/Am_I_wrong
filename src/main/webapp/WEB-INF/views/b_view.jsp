@@ -42,7 +42,7 @@
 				글쓴이 :<c:out value="${c.name }" /> /
 				등록일: <fmt:formatDate value="${c.regdate }"/> 
 				
-				<input type="button" value="Delete"  id="${c.idx }" onclick="view_popup('${c.idx}')">
+				<input type="button" value="Delete"  id="${c.idx }" onclick="showPopup('${c.idx}')">
 				<br>
 				댓글 :<c:set var ="content" value="${c.content } "/>
 				<c:set var="content" value="${fn:replace(content,'<','&lt;') }"/>

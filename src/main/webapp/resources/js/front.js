@@ -28,6 +28,8 @@ function showPopup(obj){
 		board_modi();
 	else if(obj =='b_del') 
 		board_del();
+	else
+		comment_del(obj);
 }
 
 function loginForm(i){

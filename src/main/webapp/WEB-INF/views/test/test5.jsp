@@ -1,3 +1,5 @@
+<%@page import="java.util.HashMap"%>
+
 <%@ page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -8,7 +10,7 @@
     //클라이언트에서 넘어온 정보 받기
     String y=request.getParameter("year");
     String m=request.getParameter("month");
-     
+    HashMap<String,Integer> map = new HashMap<String,Integer>();
     //현재 컴퓨터 시스템의 날짜 구하기
     Calendar cal = Calendar.getInstance();
     int year = cal.get(Calendar.YEAR);
@@ -21,8 +23,8 @@
      
     cal.set(year, month-1, 1);
     year = cal.get(Calendar.YEAR);
-    month = cal.get(Calendar.MONTH)+1;
-     
+   //	month = cal.get(Calendar.MONTH)+2;
+   
     // 1일은 무슨 요일?
     int w = cal.get(Calendar.DAY_OF_WEEK);
      
@@ -64,7 +66,7 @@
             <td width="30" align="center">토</td>
         </tr>
         
-        <%
+        <%	out.println(w);
             int line = 0;
             //앞의 공백처리
             out.print("<tr bgcolor='#ffffff' height='25'>");
@@ -72,12 +74,12 @@
                 out.print("<td> </td>");
                 line+=1;
             }
-             
+            
             //1~마지막날까지 출력하기
             for(int i=1; i<=endDays; i++) {
                 
                 out.print("<td align='center'>");
-                out.print(i);
+                out.print("<a href='#'>"+i+"</a>");
                 out.print("</td>");
                 line+=1;
                 if(line==7 && i!=endDays) {
@@ -87,14 +89,14 @@
             }
              
             //뒷부분 공백 처리
-            /* 
+            
             while(line>0 && line<7) {
                 out.print("<td> </td>");
                 line++;
             }
             out.print("</tr>");
-             */
       %>
+      
     </table>
 </center>
 </body>

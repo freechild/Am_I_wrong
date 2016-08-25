@@ -1,10 +1,13 @@
-package event.service;
+package main.event;
 
 import java.util.Calendar;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class EventProess {
 	
 	public HashMap<String, Integer> eventProress(HttpServletRequest request){
@@ -25,20 +28,17 @@ public class EventProess {
 			month = cal.get(Calendar.MONTH)+1;
 		}
 		
-		year= cal.get(Calendar.YEAR);
-		month= cal.get(Calendar.YEAR); //클라이언트에서 넘겨준 값이 없을때 표시하는 값
-		
 		cal.set(year, month-1, 1);
-	    year = cal.get(Calendar.YEAR);
-	    month = cal.get(Calendar.MONTH)+1;
-		
+		int firstDay = cal.get(Calendar.DAY_OF_WEEK);
+	    int lastDay = cal.getActualMaximum(Calendar.DATE);
+	    
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		
 		map.put("year", year);
 		map.put("month", month);
-		
+		map.put("firstDay", firstDay);
+		map.put("lastDay", lastDay);
 		return map;
 	}
-     
 	
 }

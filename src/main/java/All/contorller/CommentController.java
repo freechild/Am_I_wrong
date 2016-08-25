@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import All.vo.CommentVO;
 import board.service.CommentService;
-import board.service.PasswordCheckLogic;
+import board.service.ClientCheckLogic;
 
 @Controller
 public class CommentController {
@@ -21,12 +21,12 @@ public class CommentController {
 	@Autowired
 	private CommentService commentService;
 	@Autowired
-	private PasswordCheckLogic passwordCheckLogic;
+	private ClientCheckLogic clientCheckLogic;
 	
 	
 	@RequestMapping(value ="/b_comment")
 	@ResponseBody
-	public String b_comment( String email,@ModelAttribute CommentVO vo,HttpServletRequest request){
+	public String b_comment(@ModelAttribute CommentVO vo,HttpServletRequest request){
 		
 		System.out.println(vo);
 		
@@ -35,19 +35,17 @@ public class CommentController {
 		return "b_view?idx="+vo.getB_ref();
 	}
 
-	@RequestMapping(value ="${email}/c_checkPW")
+	@RequestMapping(value ="/c_del")
 	@ResponseBody
-	public String c_checkPW(@PathVariable("email") String email,@RequestParam("pw") String pw,@RequestParam("idx") int idx,
-			@RequestParam("b_idx")int b_idx){
-		System.out.println(b_idx);
-		String bool =
-		passwordCheckLogic.passwordCheck(idx, pw, 1);
-		
-		if(bool=="true" ){
+	public String c_delete(@RequestParam("idx") int idx,
+			@RequestParam("mem_ref")int mem_ref){
+		System.out.println("get in");
+		String flag =
+		clientCheckLogic.editCheck(idx, mem_ref, 1);
+		System.out.println(flag);
+		if(flag =="true")
 			commentService.delete(idx);
-			bool = "b_view?idx="+b_idx;
-		}
 		
-		return bool;
+		return flag;
 	}
 }

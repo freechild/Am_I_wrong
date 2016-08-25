@@ -149,7 +149,7 @@ public class BoardService {
 			result=1;
 		}
 		
-//		System.out.println(result);
+		System.out.println(result);
 	}
 }
 

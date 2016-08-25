@@ -27,12 +27,14 @@ public class BoardDAO {
 	public int getCount(int categoryid){
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("categoryid", categoryid+"");
-//		System.out.println("cid = "+categoryid+", total = "+session.selectOne("board.getCount",map));
+		System.out.println("cid = "+categoryid+", total = "+session.selectOne("board.getCount",map));
 		return session.selectOne("board.getCount",map);
 	}
 	public int getCount(int categoryid,String search,String searchContent){
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("categoryid", categoryid+"");
+		System.out.println(search);
+		System.out.println(searchContent);	
 		map.put("search", search);
 		map.put("searchContent", searchContent);
 		return session.selectOne("board.getCount",map);
@@ -74,7 +76,7 @@ public class BoardDAO {
 		map.put("endNo",endNo+"" );
 		map.put("categoryid",categoryid+"" );
 		map.put("search", search);
-		map.put("searchContent", searchContent);
+		map.put("searchContent", searchContent);	
 		return session.selectList("board.selectList",map);
 	}
 

@@ -7,8 +7,8 @@
 <head>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
-	 <meta http-equiv="Content-Script-Type" content="text/javascript">
-	 <meta http-equiv="Content-Style-Type" content="text/css">
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
+	<meta http-equiv="Content-Style-Type" content="text/css">
  
 	<title>Front</title>
 	<link rel="stylesheet" type="text/css" href="/resources/css/frontPage.css" />

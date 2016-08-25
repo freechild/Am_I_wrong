@@ -4,10 +4,10 @@ import java.util.List;
 
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,21 +16,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.request.SessionScope;
+
 
 import com.google.gson.Gson;
 
 import All.vo.BoardVO;
 import All.vo.CategoryVO;
-import All.vo.CommentVO;
+
 import All.vo.PagingList;
 import All.vo.TotalVO;
 import board.service.BoardService;
 import board.service.CategoryService;
 import board.service.CommentService;
 import board.service.PagingProcess;
-import board.service.PasswordCheckLogic;
-import member.service.MemberService;
+import board.service.ClientCheckLogic;
+
 
 
 @Controller
@@ -44,7 +44,7 @@ public class BoardController {
 		@Autowired	
 		private CommentService commentService;
 		@Autowired
-		private PasswordCheckLogic passwordCheckLogic;
+		private ClientCheckLogic clientCheckLogic;
 		
 		public BoardService getBoardService() {
 			return boardService;
@@ -186,7 +186,7 @@ public class BoardController {
 		@ResponseBody
 		public String b_modi(@PathVariable("email") String email,Model model,@RequestParam("idx")int idx,@RequestParam("mem_ref")int mem_ref){
 	
-			String flag = passwordCheckLogic.editCheck(idx, mem_ref);
+			String flag = clientCheckLogic.editCheck(idx, mem_ref);
 			
 			if(flag == "true"){
 				TotalVO vo = boardService.selectByIdx(idx);
@@ -204,7 +204,8 @@ public class BoardController {
 		}
 		
 		@RequestMapping(value ="{email}/b_modiView")
-		public void b_modiView(@PathVariable("email") String email,Model model,
+		@ResponseBody
+		public void b_modiView(@PathVariable("email") String email,
 				@ModelAttribute BoardVO vo,HttpServletRequest request){
 			
 			vo.setIp(request.getRemoteAddr());
@@ -215,6 +216,18 @@ public class BoardController {
 			
 			System.out.println(vo);
 			boardService.update(vo);			
+		}
+		@RequestMapping(value ="{email}/b_del")
+		@ResponseBody
+		public String b_delete(@PathVariable("email") String email,
+				@RequestParam("idx")int idx,@RequestParam("mem_ref")int mem_ref){
+			String flag = clientCheckLogic.editCheck(idx, mem_ref);
+			return flag;
+		}
+		@RequestMapping(value ="{email}/b_delOk")
+		@ResponseBody
+		public void b_deleteOk(@PathVariable("email") String email,@RequestParam("idx")int idx){
+			boardService.delete(idx);
 		}
 		
 		
@@ -248,7 +261,7 @@ public class BoardController {
 				searchContent = request.getParameter("searchContent");
 			}catch(Exception e){}
 			
-			PagingList<BoardVO> board =
+			PagingList<TotalVO> board =
 			boardService.selectSearch(currentPage, pageSize, blockSize, categoryid, search, searchContent);
 			List<CategoryVO>categories =
 					categoryService.getCategories();
@@ -281,7 +294,7 @@ public class BoardController {
 			model.addAttribute("b", blockSize);
 			model.addAttribute("cid", categoryid);
 			
-			PagingList<BoardVO> board =
+			PagingList<TotalVO> board =
 			boardService.selectList(currentPage, pageSize, blockSize, categoryid);
 			
 			model.addAttribute("board",board);

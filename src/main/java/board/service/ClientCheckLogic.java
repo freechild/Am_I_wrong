@@ -10,7 +10,7 @@ import board.dao.BoardDAO;
 import board.dao.CommentDAO;
 
 @Service
-public class PasswordCheckLogic {
+public class ClientCheckLogic {
 	
 	@Autowired
 	private BoardDAO boardDao;
@@ -94,6 +94,27 @@ public class PasswordCheckLogic {
 					flag = "true";
 			}
 			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return flag;
+	}
+	public String editCheck(int idx,int mem_ref,int i){
+		String flag ="null";
+		
+		try {
+			CommentVO vo = commentDao.selectByIdx(idx);
+			if(vo == null){
+				flag = "false";
+			}
+			else{
+				if(vo.getMem_ref() != mem_ref)
+					flag = "false";
+				else if(vo.getMem_ref() == mem_ref)
+					flag = "true";
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
