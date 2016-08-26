@@ -38,7 +38,7 @@ public class MainController {
 		if(session.getAttribute("email")==null)
 			return "front";
 		int m_idx=memberService.selectByIdx(email);
-		HashMap<String, Integer> map = eventProess.eventProress(request);
+		HashMap<String, String> map = eventProess.eventProress(request);
 	
 		
 		session.setAttribute("m_idx",m_idx );
@@ -49,10 +49,18 @@ public class MainController {
 	@RequestMapping(value="/calendar")
 	@ResponseBody
 	public String calendar(HttpServletRequest request){
-		HashMap<String, Integer> map = eventProess.eventProress(request);
+		HashMap<String, String> map = eventProess.eventProress(request);
 		Gson gson = new Gson();
 		String date = gson.toJson(map);
+		System.out.println(date);
 		return date;
 	}
+	@RequestMapping(value="{email}/invites", produces={"text/html"})
+	public String invites(@PathVariable("email") String email,HttpSession session,
+			Model model,HttpServletRequest request){
+		
+		
 	
+		return "friendList/invites";
+	}
 }

@@ -1,5 +1,7 @@
 package member.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,5 +66,14 @@ public class MemberService {
 		}	
 		return result;
 	}
-	
+	public List<MemberVO> friendList(String search){
+		List<MemberVO> list = null;
+		try {
+			System.out.println(search);
+			list = memberDAO.searchFriend(search);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 }

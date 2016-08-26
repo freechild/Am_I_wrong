@@ -31,6 +31,16 @@
 		delete from member where email = #{email} 
 	</delete>
 	
+	<select id="searchFriend" parameterType="String" resultType="MemberVO">
+		select * from member  
+		<where>
+			( name Like #{search}||'%'
+			OR email Like #{search}||'%'
+			)  		
+		</where>
+	</select>
+	
+	
 </mapper>
 
 

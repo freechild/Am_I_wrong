@@ -11,6 +11,7 @@ public class MemberVO{
 	private Date regdate;
 	private int status;
 	private String hint;
+	private String friends;
 	
 	public int getIdx() {
 		return idx;
@@ -53,6 +54,17 @@ public class MemberVO{
 	}
 	public void setHint(String hint) {
 		this.hint = hint;
+	}
+	public String getFriends() {
+		return friends;
+	}
+	public void setFriends(String friends) {
+		this.friends = friends;
+	}
+	@Override
+	public String toString() {
+		return "MemberVO [idx=" + idx + ", Name=" + Name + ", Pw=" + Pw + ", email=" + email + ", regdate=" + regdate
+				+ ", status=" + status + ", hint=" + hint + ", friends=" + friends + "]";
 	}
 	
 	

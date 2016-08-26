@@ -57,7 +57,7 @@
 					<li><a class="menu-box-tab" href="#6">
 					<span class="icon fontawesome-envelope scnd-font-color"></span>Messages
 							<div class="menu-box-number">24</div></a></li>
-					<li><a class="menu-box-tab" href="#8"><span
+					<li><a class="menu-box-tab" href="invites"><span
 							class="icon entypo-paper-plane scnd-font-color"></span>Invites
 							<div class="menu-box-number">3</div></a></li>
 					<li><a class="menu-box-tab" href="#10"><span
@@ -70,28 +70,12 @@
 					</li>
 				</ul>
 			</div>
-
-
-
-
-
-
 			<!-- RIGHT-CONTAINER -->
 			<div class="right-container container">
 				<!-- 전체 움직이는 로그인부분 테이블 감싸야함 -->
-				
-				
-
-
 				<div class="calendar-month block">
 
-					<div class="arrow-btn-container">
-						<a class="arrow-btn left" href="#202"><span
-							class="icon fontawesome-angle-left"></span></a>
-						<h2 class="titular" id="calendar"></h2>
-						<a class="arrow-btn right" href="#203"><span
-							class="icon fontawesome-angle-right"></span></a>
-					</div>
+					<div class="arrow-btn-container"></div>
 					<!-- 갤린더 수정부분 -->
 					<table class="calendar">
 						<thead class="days-week">
@@ -104,8 +88,7 @@
 								<th>F</th>
 								<th>S</th>
 							</tr>
-						</thead>
-						
+						</thead>		
 						<tbody class="calendar_N"></tbody>
 					</table>
 				</div>

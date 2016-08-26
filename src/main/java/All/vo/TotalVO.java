@@ -13,6 +13,7 @@ public class TotalVO {
 	private Date regdate;
 	private int likes;
 	private int read;
+	private String friends;
 	public String getName() {
 		return name;
 	}
@@ -73,13 +74,18 @@ public class TotalVO {
 	public void setMem_ref(int mem_ref) {
 		this.mem_ref = mem_ref;
 	}
+	public String getFriends() {
+		return friends;
+	}
+	public void setFriends(String friends) {
+		this.friends = friends;
+	}
 	@Override
 	public String toString() {
 		return "TotalVO [name=" + name + ", idx=" + idx + ", mem_ref=" + mem_ref + ", categoryid=" + categoryid
 				+ ", title=" + title + ", content=" + content + ", ip=" + ip + ", regdate=" + regdate + ", likes="
-				+ likes + ", read=" + read + "]";
+				+ likes + ", read=" + read + ", friends=" + friends + "]";
 	}
-	
 	
 	
 	
