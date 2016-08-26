@@ -84,7 +84,7 @@
 
 
 				<div class="calendar-month block">
-					<!-- CALENDAR MONTH (RIGHT-CONTAINER) -->
+
 					<div class="arrow-btn-container">
 						<a class="arrow-btn left" href="#202"><span
 							class="icon fontawesome-angle-left"></span></a>
@@ -106,12 +106,7 @@
 							</tr>
 						</thead>
 						
-						<tbody class="calendar_N">
-							
-							
-							
-					
-						</tbody>
+						<tbody class="calendar_N"></tbody>
 					</table>
 				</div>
 				<!-- end calendar-month block -->

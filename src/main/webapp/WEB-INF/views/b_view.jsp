@@ -11,7 +11,6 @@
 			height:60px; border:2px solid #777;display:none;background-color: white">	 	 
 </div>	
 	<input type="hidden" value="${vo.idx }" id="idx">
-	
 	name : <c:out value="${vo.name }" /> ,
 	ip : <c:out value="${vo.ip }" /> , 
 	likes : <c:out value="${vo.likes }" /><br>
