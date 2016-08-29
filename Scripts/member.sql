@@ -5,7 +5,8 @@ CREATE TABLE member(
 	pw varchar2(200 char) NOT NULL,
 	regdate TIMESTAMP DEFAULT sysdate,
 	status number(2) DEFAULT 0,
-	hint varchar(30 char) not null
+	hint varchar2(30 char) not null
+	friendList varchar2(3000 char),
 );
 
 CREATE SEQUENCE member_idx_seq;
@@ -22,5 +23,22 @@ CREATE TABLE member(
 	address2 varchar2(100 char) NOT NULL,
 	regdate TIMESTAMP DEFAULT sysdate,
 	status number(2) DEFAULT 0,
-	hint varchar(30 char) not null
+	hint varchar2(30 char) not null,
+	friendList varchar2(3000 char),
+	add_friend varchar2(3000 char)
 );
+
+CREATE SEQUENCE message_seq_idx;
+CREATE TABLE message(
+	idx NUMBER(20) PRIMARY KEY,
+	sender_idx NUMBER(20) UNIQUE,
+	recipient_idx number(20) UNIQUE,
+	message varchar(4000 char) NOT NULL,
+	add_status number(2) DEFAULT 0,
+	CONSTRAINT FK_message_sender FOREIGN KEY(sender_idx)
+	REFERENCES member(idx),
+	CONSTRAINT FK_message_recipient FOREIGN KEY(recipient_idx)
+	REFERENCES member(idx)
+);
+
+

@@ -3,8 +3,9 @@ package All.contorller;
 
 
 
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,9 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 
 import All.vo.MemberVO;
+import All.vo.MessageVO;
 import member.service.MemberService;
+import member.service.MessageService;
 
 
 
@@ -27,7 +31,8 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
-	
+	@Autowired
+	private MessageService messageService;
 	
 	@RequestMapping(value = "add_person")
 	@ResponseBody
@@ -46,16 +51,30 @@ public class MemberController {
 		session.setAttribute("email", vo.getEmail());
 		return result;
 	}
-	@RequestMapping(value = "searchFriend")
+	
+	//add this
+	@RequestMapping(value = "searchFriend",produces ="text/html; charset=UTF-8")
 	@ResponseBody
-	public String searchFried(@RequestParam("search")String search){
-		System.out.println(search);
-		List<MemberVO> list = memberService.friendList(search);
-		System.out.println(list);
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		map.put("friendList", list);
+	public Object searchFried(@RequestParam("search")String search){
+		String data =null;
 		
-		return "dsad";
+		List<MemberVO> list = memberService.friendList(search);
+//		System.out.println(list);
+		if(list.isEmpty())
+			data = "false"; 
+		else{
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("friendList", list);
+			Gson gson = new Gson();
+			data = gson.toJson(map);
+		}
+		System.out.println(data);
+		return data;
 	}
 	
+	@RequestMapping(value="addFriend")
+	@ResponseBody
+	public void addFriend(@ModelAttribute MessageVO vo){
+		messageService.insert(vo);
+	}
 }

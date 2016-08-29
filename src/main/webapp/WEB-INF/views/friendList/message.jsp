@@ -6,6 +6,7 @@
 <script src="/resources/js/mainIn.js"></script>
 <script src="/resources/js/front.js"></script>
 <script src="/resources/js/friendList.js"></script>
+<script src="/resources/js/message.js"></script>
 <link rel="stylesheet" type="text/css" href="/resources/css/friendList.css" />
 <article>
 	<div class="searchList" align="center">
@@ -15,16 +16,36 @@
 			<!-- .search_person Header -->
 			<thead>
 				<tr>
-					<th>검색어</th>
-					<th><input type="search" id="search" onkeyup='search()'></th>
-					<th><input type="button" value="seach"></th>
+					<th>당신에게 온 메세지</th>
 				</tr>
 			</thead>
 			<!-- .search_person Header -->
 
 			<!-- .search_person Body -->
-			<tbody class="searchFriend">
-				
+			<tbody>
+				<tr class='even'>
+					<td>Sender</td>
+					<td>Recipient</td>
+					<td>Message</td>
+										
+				</tr>
+				<c:if test="${listCount==0 }">
+					<tr class='even'>
+					<td></td>
+					<td>받은 메시지가 없습니다.</td>
+					<td></td>					
+				</tr>	
+				</c:if>
+				<c:if test="${listCount!=0 }">
+					<c:forEach var= "msg" items="${messageList }" varStatus="m" >
+						<tr class='even'>
+							<td>${msg.sender }</td>
+							<td>${msg.recipient }</td>
+							<td><a href="javascript:msgDetail('${msg.idx}')">${msg.message }</a></td>				
+						</tr>	
+					
+					</c:forEach>
+				</c:if>
 			</tbody>
 			
 		</table>

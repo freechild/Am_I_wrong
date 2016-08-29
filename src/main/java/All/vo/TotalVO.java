@@ -3,7 +3,10 @@ package All.vo;
 import java.util.Date;
 
 public class TotalVO {
+	//member
 	private String name;
+	
+	//board && all
 	private int idx;
 	private int mem_ref;
 	private String categoryid;
@@ -13,7 +16,31 @@ public class TotalVO {
 	private Date regdate;
 	private int likes;
 	private int read;
-	private String friends;
+	private String friendList;
+	private String add_Friend;
+	
+	//message
+	
+	private String sender;
+	private String recipient;
+	private int sender_idx;
+	private int recipient_idx;
+	private int add_status;
+	private String message;
+	
+	
+	public String getSender() {
+		return sender;
+	}
+	public void setSender(String sender) {
+		this.sender = sender;
+	}
+	public String getRecipient() {
+		return recipient;
+	}
+	public void setRecipient(String recipient) {
+		this.recipient = recipient;
+	}
 	public String getName() {
 		return name;
 	}
@@ -74,18 +101,56 @@ public class TotalVO {
 	public void setMem_ref(int mem_ref) {
 		this.mem_ref = mem_ref;
 	}
-	public String getFriends() {
-		return friends;
+	
+	public String getFriendList() {
+		return friendList;
 	}
-	public void setFriends(String friends) {
-		this.friends = friends;
+	public void setFriendList(String friendList) {
+		this.friendList = friendList;
+	}
+	public String getAdd_Friend() {
+		return add_Friend;
+	}
+	public void setAdd_Friend(String add_Friend) {
+		this.add_Friend = add_Friend;
+	}
+	public int getAdd_status() {
+		return add_status;
+	}
+	public void setAdd_status(int add_status) {
+		this.add_status = add_status;
+	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	
+	public int getSender_idx() {
+		return sender_idx;
+	}
+	public void setSender_idx(int sender_idx) {
+		this.sender_idx = sender_idx;
+	}
+	public int getRecipient_idx() {
+		return recipient_idx;
+	}
+	public void setRecipient_idx(int recipient_idx) {
+		this.recipient_idx = recipient_idx;
 	}
 	@Override
 	public String toString() {
 		return "TotalVO [name=" + name + ", idx=" + idx + ", mem_ref=" + mem_ref + ", categoryid=" + categoryid
 				+ ", title=" + title + ", content=" + content + ", ip=" + ip + ", regdate=" + regdate + ", likes="
-				+ likes + ", read=" + read + ", friends=" + friends + "]";
+				+ likes + ", read=" + read + ", friendList=" + friendList + ", add_Friend=" + add_Friend + ", sender="
+				+ sender + ", recipient=" + recipient + ", sender_idx=" + sender_idx + ", recipient_idx="
+				+ recipient_idx + ", add_status=" + add_status + ", message=" + message + "]";
 	}
+	
+	
+
+	
 	
 	
 	

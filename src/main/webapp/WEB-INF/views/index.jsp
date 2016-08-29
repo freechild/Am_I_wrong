@@ -54,7 +54,7 @@
 				<!-- MENU BOX (LEFT-CONTAINER) -->
 				<h2 class="titular">MENU BOX</h2>
 				<ul class="menu-box-menu">
-					<li><a class="menu-box-tab" href="#6">
+					<li><a class="menu-box-tab" href="message">
 					<span class="icon fontawesome-envelope scnd-font-color"></span>Messages
 							<div class="menu-box-number">24</div></a></li>
 					<li><a class="menu-box-tab" href="invites"><span

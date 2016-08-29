@@ -3,7 +3,7 @@ CREATE TABLE board(
 	mem_ref NUMBER(20) NOT NULL,
 	categoryid NUMBER(20) NOT NULL,
 	title varchar2(200 char) NOT NULL,
-	content varchar2(3000 char) NOT NULL,
+	content varchar2(4000 char) NOT NULL,
 	ip varchar2(20 char) NOT NULL,
 	savefile varchar2(20 char) NOT NULL,
 	origfile varchar2(20 char) NOT NULL,

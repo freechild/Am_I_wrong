@@ -5,13 +5,13 @@ import java.util.Date;
 public class MemberVO{
 	
 	private int idx;
-	private String Name;
-	private String Pw;
+	private String name;
+	private String pw;
 	private String email;
 	private Date regdate;
 	private int status;
 	private String hint;
-	private String friends;
+	private String friendList;
 	
 	public int getIdx() {
 		return idx;
@@ -19,18 +19,7 @@ public class MemberVO{
 	public void setIdx(int idx) {
 		this.idx = idx;
 	}
-	public String getName() {
-		return Name;
-	}
-	public void setName(String name) {
-		Name = name;
-	}
-	public String getPw() {
-		return Pw;
-	}
-	public void setPw(String pw) {
-		Pw = pw;
-	}
+	
 	public String getEmail() {
 		return email;
 	}
@@ -55,17 +44,34 @@ public class MemberVO{
 	public void setHint(String hint) {
 		this.hint = hint;
 	}
-	public String getFriends() {
-		return friends;
+	
+	public String getFriendList() {
+		return friendList;
 	}
-	public void setFriends(String friends) {
-		this.friends = friends;
+	public void setFriendList(String friendList) {
+		this.friendList = friendList;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getPw() {
+		return pw;
+	}
+	public void setPw(String pw) {
+		this.pw = pw;
 	}
 	@Override
 	public String toString() {
-		return "MemberVO [idx=" + idx + ", Name=" + Name + ", Pw=" + Pw + ", email=" + email + ", regdate=" + regdate
-				+ ", status=" + status + ", hint=" + hint + ", friends=" + friends + "]";
+		return "MemberVO [idx=" + idx + ", name=" + name + ", pw=" + pw + ", email=" + email + ", regdate=" + regdate
+				+ ", status=" + status + ", hint=" + hint + ", friendList=" + friendList + "]";
 	}
+	
+	
+	
+	
 	
 	
 	

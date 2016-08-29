@@ -39,7 +39,15 @@
 			)  		
 		</where>
 	</select>
-	
+
+	<select id="selectByIdx" parameterType="int" resultType="TotalVO">
+		select * from member where idx =#{idx}
+	</select>
+
+
+	<update id="add_friend" parameterType="java.util.HashMap">
+		update member set friendList = #{friendList} where idx=#{idx}	
+	</update>	
 	
 </mapper>
 

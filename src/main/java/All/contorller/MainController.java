@@ -1,6 +1,7 @@
 package All.contorller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
+import All.vo.TotalVO;
 import main.event.EventProess;
 import member.service.MemberService;
+import member.service.MessageService;
 
 @Controller
 public class MainController {
@@ -25,6 +28,7 @@ public class MainController {
 	private MemberService memberService;
 	@Autowired
 	private EventProess eventProess;
+	
 	
 	@RequestMapping(value = {"/","main"}, method = RequestMethod.GET)
 	public String home() {
@@ -55,12 +59,9 @@ public class MainController {
 		System.out.println(date);
 		return date;
 	}
-	@RequestMapping(value="{email}/invites", produces={"text/html"})
-	public String invites(@PathVariable("email") String email,HttpSession session,
-			Model model,HttpServletRequest request){
-		
-		
 	
-		return "friendList/invites";
-	}
+	
+	
+	
+	
 }
