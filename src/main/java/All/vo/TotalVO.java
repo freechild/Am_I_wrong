@@ -17,7 +17,6 @@ public class TotalVO {
 	private int likes;
 	private int read;
 	private String friendList;
-	private String add_Friend;
 	
 	//message
 	
@@ -108,12 +107,6 @@ public class TotalVO {
 	public void setFriendList(String friendList) {
 		this.friendList = friendList;
 	}
-	public String getAdd_Friend() {
-		return add_Friend;
-	}
-	public void setAdd_Friend(String add_Friend) {
-		this.add_Friend = add_Friend;
-	}
 	public int getAdd_status() {
 		return add_status;
 	}
@@ -143,10 +136,11 @@ public class TotalVO {
 	public String toString() {
 		return "TotalVO [name=" + name + ", idx=" + idx + ", mem_ref=" + mem_ref + ", categoryid=" + categoryid
 				+ ", title=" + title + ", content=" + content + ", ip=" + ip + ", regdate=" + regdate + ", likes="
-				+ likes + ", read=" + read + ", friendList=" + friendList + ", add_Friend=" + add_Friend + ", sender="
-				+ sender + ", recipient=" + recipient + ", sender_idx=" + sender_idx + ", recipient_idx="
-				+ recipient_idx + ", add_status=" + add_status + ", message=" + message + "]";
+				+ likes + ", read=" + read + ", friendList=" + friendList + ", sender=" + sender + ", recipient="
+				+ recipient + ", sender_idx=" + sender_idx + ", recipient_idx=" + recipient_idx + ", add_status="
+				+ add_status + ", message=" + message + "]";
 	}
+
 	
 	
 

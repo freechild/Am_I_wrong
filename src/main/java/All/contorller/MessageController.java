@@ -32,6 +32,7 @@ public class MessageController {
 			Model model,HttpServletRequest request){
 		return "friendList/invites";
 	}
+	
 	@RequestMapping(value="{email}/message", produces={"text/html"})
 	public String Message(@PathVariable("email") String email,HttpSession session,
 			Model model,HttpServletRequest request){

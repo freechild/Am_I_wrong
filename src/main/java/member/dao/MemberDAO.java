@@ -25,8 +25,11 @@ public class MemberDAO {
 	public MemberVO selectByone(String email){
 		return session.selectOne("member.selectByOne",email);
 	}
-	public List<MemberVO> searchFriend(String search){
-		return session.selectList("member.searchFriend",search);
+	public List<MemberVO> searchFriend(String search,int idx){
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("search", search);
+		map.put("idx",idx+"");
+		return session.selectList("member.searchFriend",map);
 	}
 	public TotalVO selectByIdx(int idx){
 		return session.selectOne("member.selectByIdx",idx);

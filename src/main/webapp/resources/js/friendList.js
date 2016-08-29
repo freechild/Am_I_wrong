@@ -3,6 +3,7 @@ function search(){
 		$.ajax({
     		url :'/searchFriend',
     		data:{
+    			'idx' : $('#scope_idx').val(),
     			'search' : $('#search').val()
     		}	
     	}).done(function(data){
@@ -38,8 +39,8 @@ function addfriend(i){
 			"recipient_idx" : i,
 			"sender_idx" : $('#scope_idx').val()
 		}
-	}).done(function(){
-		alert("메시지를 보내셨습니다.")
+	}).done(function(data){
+		alert(data);
 	})
 }
 

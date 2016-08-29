@@ -1,5 +1,6 @@
 package member.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,20 +20,46 @@ public class MessageService {
 	private MemberDAO memberDAO;
 	
 	
-	public void insert(MessageVO vo){	
+	public boolean insert(MessageVO vo){
+		boolean bool = false;
 		try {			
 			TotalVO Tvo1 = 
 			memberDAO.selectByIdx(vo.getRecipient_idx());
+			bool=checkFriend(Tvo1,vo.getSender_idx());
 			TotalVO Tvo2 = 
 					memberDAO.selectByIdx(vo.getSender_idx());
 			vo.setMessage(Tvo2.getName() + "님이 " +Tvo1.getName() +"님에게 친구신청을 합니다.");
 			vo.setAdd_status(1);
-			System.out.println(vo);
-			messageDAO.insert(vo);
+			System.out.println("chk friend = "+bool);
+//			System.out.println(vo);
+			if(bool==true)
+				messageDAO.insert(vo);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}	
+		}
+		return bool;
 	}
+	public boolean checkFriend(TotalVO vo,int sender_idx){
+		boolean bool = true;
+		try {
+			String list = vo.getFriendList();
+			
+			if(list!=null){
+				String[] ar = list.split("/");
+				for(String i : ar){
+					System.out.println("split = "+i);
+					if(i.equals(sender_idx+"")){
+						bool =  false;						
+					}
+				}		
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return bool;
+	}
+	
+	
 	
 	public List<TotalVO> selectList(int both_idx){
 		List<TotalVO> list=null;

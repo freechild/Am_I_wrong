@@ -67,11 +67,11 @@ public class MemberService {
 		}	
 		return result;
 	}
-	public List<MemberVO> friendList(String search){
+	public List<MemberVO> friendList(String search,int idx){
 		List<MemberVO> list = null;
 		try {
 			System.out.println(search);
-			list = memberDAO.searchFriend(search);
+			list = memberDAO.searchFriend(search,idx);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

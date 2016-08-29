@@ -17,6 +17,7 @@
 			<thead>
 				<tr>
 					<th>당신에게 온 메세지</th>
+					<th><input type="button" value="Send Msg" onclick="javascript:sendMsg()"></th>
 				</tr>
 			</thead>
 			<!-- .search_person Header -->
@@ -46,6 +47,7 @@
 					
 					</c:forEach>
 				</c:if>
+				
 			</tbody>
 			
 		</table>

@@ -55,10 +55,10 @@ public class MemberController {
 	//add this
 	@RequestMapping(value = "searchFriend",produces ="text/html; charset=UTF-8")
 	@ResponseBody
-	public Object searchFried(@RequestParam("search")String search){
+	public Object searchFried(@RequestParam("search")String search,@RequestParam("idx")int idx){
 		String data =null;
 		
-		List<MemberVO> list = memberService.friendList(search);
+		List<MemberVO> list = memberService.friendList(search,idx);
 //		System.out.println(list);
 		if(list.isEmpty())
 			data = "false"; 
@@ -72,9 +72,15 @@ public class MemberController {
 		return data;
 	}
 	
-	@RequestMapping(value="addFriend")
+	@RequestMapping(value="addFriend",produces ="text/html; charset=UTF-8")
 	@ResponseBody
-	public void addFriend(@ModelAttribute MessageVO vo){
-		messageService.insert(vo);
+	public String addFriend(@ModelAttribute MessageVO vo){
+		String result =null;
+		boolean bool = messageService.insert(vo);
+		if(bool==true) 
+			result ="메시지를 보냈습니다.";
+		else
+			result ="이미 등록된 친구입니다.";
+		return result;
 	}
 }
